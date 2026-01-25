@@ -17,5 +17,7 @@ public class LiveDemo : MonoBehaviour
         Transform myTransform = GetComponent<Transform>();
         myTransform.Rotate(new Vector3(0f, yawDegreesPerSecond * Time.deltaTime, 0f));
         
+        // Since the sun is at the origin, the planets should be able to orbit the origin
+        transform.RotateAround(Vector3.zero, Vector3.up, yawOrbitPerSecond * Time.deltaTime);
     }
 }
