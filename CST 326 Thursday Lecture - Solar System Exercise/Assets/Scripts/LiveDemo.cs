@@ -3,6 +3,7 @@ using UnityEngine;
 public class LiveDemo : MonoBehaviour
 {
     public float yawDegreesPerSecond = 45f;   
+    public float yawOrbitPerSecond = 50f;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
