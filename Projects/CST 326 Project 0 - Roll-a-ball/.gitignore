@@ -6,8 +6,9 @@
 /[Ll]ibrary/
 /[Tt]emp/
 /[Oo]bj/
-/[Bb]uild/
-/[Bb]uilds/
+# Commented out to hopefully allow builds to be pushed
+#/[Bb]uild/
+#/[Bb]uilds/
 /[Ll]ogs/
 /[Uu]ser[Ss]ettings/
 *.log
