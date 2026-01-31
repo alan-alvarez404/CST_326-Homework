@@ -5,9 +5,6 @@ public class PongPaddle : MonoBehaviour
 {
     public float paddleSpeed = 1f;
     public float forcedStrength = 10f;
-    public float leftKey;
-    public float rightKey;
-    
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -15,21 +12,26 @@ public class PongPaddle : MonoBehaviour
         
     }
 
+    public Key upKey = Key.W;
+    public Key downKey = Key.S;
+
+    
+
     // Update is called once per frame
     void Update()
     {
         
-        if (Keyboard.current.dKey.isPressed)
+        if (Keyboard.current[upKey].isPressed)
         {
-            Vector3 force = new Vector3(0f, 0f, forcedStrength);
+            Vector3 force = new Vector3(0f, forcedStrength, 0f);
             
             Rigidbody rigidbody = GetComponent<Rigidbody>();
             rigidbody.AddForce(force, ForceMode.Force);
         }
 
-        if (Keyboard.current.aKey.isPressed)
+        if (Keyboard.current[downKey].isPressed)
         {
-            Vector3 force = new Vector3(0f, 0f, -forcedStrength);
+            Vector3 force = new Vector3(0f, -forcedStrength, 0f);
             
             Rigidbody rigidbody = GetComponent<Rigidbody>();
             rigidbody.AddForce(force, ForceMode.Force);
