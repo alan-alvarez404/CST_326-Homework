@@ -1388,7 +1388,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd06695596ce662458729dd07f6d952f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Slot
-  slotNumber: 0
+  slotNumber: 1
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -1592,7 +1592,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd06695596ce662458729dd07f6d952f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Slot
-  slotNumber: 0
+  slotNumber: 2
 --- !u!1 &384738185
 GameObject:
   m_ObjectHideFlags: 0
@@ -2623,7 +2623,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd06695596ce662458729dd07f6d952f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Slot
-  slotNumber: 0
+  slotNumber: 2
 --- !u!1 &564542506
 GameObject:
   m_ObjectHideFlags: 0
@@ -2653,14 +2653,14 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 275052128}
-  - {fileID: 2029197444}
-  - {fileID: 552089683}
   - {fileID: 905094666}
+  - {fileID: 552089683}
+  - {fileID: 275052128}
   - {fileID: 343954598}
-  - {fileID: 163196732}
+  - {fileID: 2029197444}
   - {fileID: 833918819}
   - {fileID: 2131483424}
+  - {fileID: 163196732}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &576075935
@@ -3326,7 +3326,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd06695596ce662458729dd07f6d952f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Slot
-  slotNumber: 0
+  slotNumber: 4
 --- !u!1 &905094665
 GameObject:
   m_ObjectHideFlags: 0
@@ -3393,7 +3393,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd06695596ce662458729dd07f6d952f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Slot
-  slotNumber: 0
+  slotNumber: 1
 --- !u!1 &905368796
 GameObject:
   m_ObjectHideFlags: 0
@@ -8598,7 +8598,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd06695596ce662458729dd07f6d952f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Slot
-  slotNumber: 0
+  slotNumber: 3
 --- !u!1 &2059429073
 GameObject:
   m_ObjectHideFlags: 0

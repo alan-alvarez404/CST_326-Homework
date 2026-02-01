@@ -28,8 +28,12 @@ public class BallSpawner : MonoBehaviour
         //if (Keyboard.current.spaceKey.isPressed && Time.deltaTime > lastInputTime + inputDelay)
         if(Keyboard.current.spaceKey.isPressed)
         {
-            Transform myTransform = GetComponent<Transform>();
-            GameObject ball = Instantiate(ballPrefab, myTransform.position, Quaternion.identity);
+            Vector3 basePos = transform.position;
+
+            float randomX = Random.Range(-0.2f, 2.25f);
+            Vector3 spawnPos = new Vector3(randomX, basePos.y, basePos.z);
+
+            GameObject ball = Instantiate(ballPrefab, spawnPos, Quaternion.identity);
             spawnedBalls.Add(ball);
         }
     }
