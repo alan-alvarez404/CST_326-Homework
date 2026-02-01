@@ -1,4 +1,6 @@
+using System.Diagnostics;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 public class LoadGame : MonoBehaviour
 {
@@ -11,11 +13,24 @@ public class LoadGame : MonoBehaviour
     {
         leftScore++;
         Debug.Log("Player 1 scored! Current score: " + leftScore);
+
+        if (leftScore == 11)
+        {
+            Debug.Log("Game Over, Left Paddle Wins");
+            leftScore = 0;
+            rightScore = 0;
+        }
     }
 
     public void AddPointToRight()
     {
         rightScore++;
         Debug.Log("Player 2 scored! Current score: " + rightScore);
+        if (rightScore == 11)
+        {
+            Debug.Log("Game Over, Right Paddle Wins");
+            leftScore = 0;
+            rightScore = 0;
+        }
     }
 }
