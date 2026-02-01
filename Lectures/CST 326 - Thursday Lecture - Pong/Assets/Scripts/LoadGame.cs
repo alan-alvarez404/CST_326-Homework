@@ -2,15 +2,20 @@ using UnityEngine;
 
 public class LoadGame : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public int leftScore = 0;
+    public int rightScore = 0;
+
+    public Transform ballSpawn;
+
+    public void AddPointToLeft()
     {
-        
+        leftScore++;
+        Debug.Log("Player 1 scored! Current score: " + leftScore);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void AddPointToRight()
     {
-        
+        rightScore++;
+        Debug.Log("Player 2 scored! Current score: " + rightScore);
     }
 }
