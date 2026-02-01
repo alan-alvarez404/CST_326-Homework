@@ -1489,7 +1489,7 @@ MonoBehaviour:
   ballSpeed: 20
   speedIncreaseOnBounce: 5
   maxAngle: 60
-  minimumYAngle: 0.2
+  minimumYAngle: 0.15
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
