@@ -50,8 +50,8 @@ public class PongPaddle : MonoBehaviour
         Quaternion someOtherAngleRotation = Quaternion.Euler(angle, 0f, 0f);
         Vector3 someOtherRotatedVector = someOtherAngleRotation * up;
 
-        Debug.DrawRay(transform.position, rotatedVector * 5f, Color.red);
-        Debug.DrawRay(transform.position, otherRotatedVector * 5f, Color.green);
-        Debug.DrawRay(transform.position, someOtherRotatedVector * 5f, Color.blue);
+        // Debug.DrawRay(transform.position, rotatedVector * 5f, Color.red);
+        // Debug.DrawRay(transform.position, otherRotatedVector * 5f, Color.green);
+        // Debug.DrawRay(transform.position, someOtherRotatedVector * 5f, Color.blue);
     }
 }
