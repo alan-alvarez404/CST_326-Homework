@@ -3,10 +3,10 @@ using UnityEngine;
 public class BallBehaviour : MonoBehaviour
 {
     public float ballSpeed = 8f;
-    public float speedIncreaseOnBounce = 0f;
-    private float bounceAngle = 60f;
+    public float speedIncreaseOnBounce = 5f;
+    public float bounceAngle = 60f;
     public float maxAngle = 35f;
-    public float minimumYAngle = 0.15f;
+    public float minimumYAngle = 0.20f; // Used to properly bounce off top and bottom walls
 
 
     private Rigidbody rb;
@@ -52,6 +52,7 @@ public class BallBehaviour : MonoBehaviour
         float angleRad = Random.Range(-maxAngle, maxAngle) * Mathf.Deg2Rad;
         
         Vector3 dir = new Vector3(0f, Mathf.Sin(angleRad), Mathf.Cos(angleRad) * direction).normalized;
+        dir = fixMinYReflection(dir);
         
         rb.linearVelocity = dir * currentSpeed;
     }
@@ -65,15 +66,18 @@ public class BallBehaviour : MonoBehaviour
             // Speed increase upon rebounce
             currentSpeed += speedIncreaseOnBounce;
 
-            // Detect Z axis
-            float yOffset = transform.position.y - c.transform.position.y;
+            // Changed the variables to use c.collider and c.contacts to that if we ever
+            // Decide to have the paddles change in some way (via powerups which will happen)
+            float ballContactY = c.contacts[0].point.y; // This is where the ball hit the paddle
 
-            float halfPaddle = c.collider.bounds.extents.y;
+            float paddleCenterY = c.collider.bounds.center.y; // Center of the paddle
+            
+            float halfPaddle = c.collider.bounds.extents.y; // Simply half the paddle
 
             float t = 0f;
-            if (halfPaddle > 0f)
+            if (halfPaddle > 0.0001f)
             {
-                t = yOffset / halfPaddle;
+                t = ballContactY / halfPaddle;
                 t = Mathf.Clamp(t, -1f, 1f);
             }
 
@@ -86,6 +90,8 @@ public class BallBehaviour : MonoBehaviour
             }
 
             Vector3 dir = new Vector3(0f, Mathf.Sin(angleRad), Mathf.Cos(angleRad) * direction).normalized;
+            dir = fixMinYReflection(dir);
+
             rb.linearVelocity = dir * currentSpeed;
             return;
         }
@@ -97,6 +103,8 @@ public class BallBehaviour : MonoBehaviour
             Vector3 n = c.contacts[0].normal;
             Vector3 reflected = Vector3.Reflect(v, n);
             
+            // This was the old logic for trying to reflect the ball off the top and bottom walls
+            /*
             // Check so that when the ball hits the wall it bounces back in an appropiate angle
             // Before it would appear as if sliding along these walls
             if (Mathf.Abs(reflected.y) < minimumYAngle)
@@ -113,8 +121,12 @@ public class BallBehaviour : MonoBehaviour
 
                 reflected.y = sign * minimumYAngle;
             }
+            */
             
-            rb.linearVelocity = reflected.normalized * currentSpeed;
+            Vector3 dir = reflected.normalized;
+            dir = fixMinYReflection(dir);
+            
+            rb.linearVelocity = dir * currentSpeed;
             Debug.Log("Hit: " + c.gameObject.name + " tag=" + c.gameObject.tag);
             return;
         }
@@ -130,22 +142,53 @@ public class BallBehaviour : MonoBehaviour
         
         //Debug.Log("Speed magnitude: " + rb.linearVelocity.magnitude + " | vel: " + rb.linearVelocity);
     }
-
     
-    // Old function (unused)
-    /*
-    // Update is called once per frame
-    void StartBall()
+    // This is the new function to stabiilize and fix the ball's Y reflected direction
+    private Vector3 fixMinYReflection(Vector3 dir)
     {
-        rb.linearVelocity = Vector3.zero;
-        rb.angularVelocity = Vector3.zero;
+        float absY = Mathf.Abs(dir.y);
+        if (absY >= minimumYAngle)
+        {
+            return dir;
+        }
 
-        float direction =  Random.value < 0.5f ? -1f : 1f;
-        float angle = Random.Range(-angleFromStart, angleFromStart) * Mathf.Deg2Rad;
+        float signY = 1f;
+        if (dir.y < 0f)
+        {
+            signY = -1f;
+        }
+        else if (dir.y > 0f)
+        {
+            signY = 1f;
+        }
+        else
+        {
+            if (Random.value < 0.5f)
+            {
+                signY = -1f;
+            }
+        }
 
-        Vector3 dir = new Vector3(Mathf.Cos(angle) * direction, 0f, Mathf.Sin(angle)).normalized;
+        float signZ = 1f;
+        if (dir.z < 0f)
+        {
+            signZ = -1f;
+        }
+        else if (dir.z > 0f)
+        {
+            signZ = 1f;
+        }
+        else
+        {
+            if (Random.value < 0.5f)
+            {
+                signZ = -1f;
+            }
+        }
 
-        rb.linearVelocity = dir * ballSpeed;
+        float y = minimumYAngle * signY;
+        float z = Mathf.Sqrt(Mathf.Max(0f, 1f - y * y)) * signZ;
+
+        return new Vector3(0f, y, z);
     }
-    */
 }
