@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2891505725247233005}
   - component: {fileID: 3665620059318987247}
   - component: {fileID: 4225501907540942995}
+  - component: {fileID: 5988612756155523732}
   m_Layer: 0
   m_Name: PowerUp
   m_TagString: PickUp
@@ -69,7 +70,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 19eba6429dd738241b93cf7aad1adfc4, type: 2}
+  - {fileID: 2100000, guid: 47f42fd0fd2388a49b91e7d1f99059ff, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -126,6 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 477e81ef0c29c094297681ab9994658c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  ballScaleMultiplier: 2
 --- !u!54 &4225501907540942995
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -153,3 +155,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &5988612756155523732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6994136048087086934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa46a2c0a991b8941b99ea91a76faff3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NeonRainbow
+  cycleSpeed: 0.5
+  emissionIntensity: 2.5
+  material: {fileID: 0}
