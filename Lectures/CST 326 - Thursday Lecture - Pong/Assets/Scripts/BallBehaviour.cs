@@ -77,7 +77,7 @@ public class BallBehaviour : MonoBehaviour
             float t = 0f;
             if (halfPaddle > 0.0001f)
             {
-                t = ballContactY / halfPaddle;
+                t = (ballContactY - paddleCenterY) / halfPaddle;
                 t = Mathf.Clamp(t, -1f, 1f);
             }
 
