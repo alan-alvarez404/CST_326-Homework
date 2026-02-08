@@ -9,12 +9,12 @@ public class LoadGame : MonoBehaviour
 
     public Transform ballSpawn;
 
-    public void AddPointToLeft()
+    public void addPointsToLeft(int points)
     {
-        leftScore++;
+        leftScore += points;
         Debug.Log("Player 1 scored! Current score: " + leftScore);
 
-        if (leftScore == 11)
+        if (leftScore >= 11)
         {
             Debug.Log("Game Over, Left Paddle Wins");
             leftScore = 0;
@@ -22,11 +22,11 @@ public class LoadGame : MonoBehaviour
         }
     }
 
-    public void AddPointToRight()
+    public void addPointsToRight(int points)
     {
-        rightScore++;
+        rightScore += points;
         Debug.Log("Player 2 scored! Current score: " + rightScore);
-        if (rightScore == 11)
+        if (rightScore >= 11)
         {
             Debug.Log("Game Over, Right Paddle Wins");
             leftScore = 0;

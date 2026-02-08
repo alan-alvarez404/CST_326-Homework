@@ -3,19 +3,18 @@ using UnityEngine;
 public class DualTrigger : MonoBehaviour
 {
     private LoadGame loadGame;
-    private BallBehaviour ballBehaviour;
-    private BallBehaviour ball;
-
+    
+    // If we try to use these variables when there is a bonus ball
+    // in the game field, if the bonus ball scores it'll get rid
+    // of the main original ball. Have to comment these out
+    // private BallBehaviour ballBehaviour;
+    // private BallBehaviour ball;
+    
     private void Awake()
     {
         if (loadGame == null)
         {
             loadGame = FindFirstObjectByType<LoadGame>();
-        }
-
-        if (ball == null)
-        {
-            ball = FindFirstObjectByType<BallBehaviour>();
         }
     }
 
@@ -26,36 +25,53 @@ public class DualTrigger : MonoBehaviour
             return;
         }
 
-        if (loadGame == null || ball == null)
+        if (loadGame == null)
         {
-            Debug.LogError("Missing LoadGame or BallBehaviour reference.");
+            Debug.LogError("Missing LoadGame reference.");
             return;
         }
 
-        if (loadGame.ballSpawn == null)
+        BallBehaviour hitBall = other.GetComponent<BallBehaviour>();
+        if (hitBall == null)
         {
-            Debug.LogError("LoadGame.ballSpawn is NOT assigned in the Inspector.");
+            Debug.LogError("Missing BallBehaviour reference.");
             return;
+        }
+
+        int points = 1;
+        if (hitBall.isBonus)
+        {
+            points = 3;
         }
 
         if (CompareTag("LeftGoal"))
         {
-            loadGame.AddPointToRight();
-            ball.resetBall(loadGame.ballSpawn.position);
+            loadGame.addPointsToRight(points);
         }
         else if (CompareTag("RightGoal"))
         {
-            loadGame.AddPointToLeft();
-            ball.resetBall(loadGame.ballSpawn.position);
+            loadGame.addPointsToLeft(points);
         }
         else
         {
             Debug.LogWarning("DualTrigger is not LeftGoal/RightGoal: " + gameObject.name);
+            return;
+        }
+
+        // What happens to the ball after scoring
+        if (hitBall.isBonus)
+        {
+            Destroy(hitBall.gameObject);
+        }
+        else
+        {
+            if (loadGame.ballSpawn == null)
+            {
+                Debug.LogError("LoadGame.ballSpawn is NOT assigned in the Inspector.");
+                return;
+            }
+
+            hitBall.resetBall(loadGame.ballSpawn.position);
         }
     }
-
-
-
-
-
 }

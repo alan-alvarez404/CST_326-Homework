@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -15,12 +16,18 @@ public class PongPaddle : MonoBehaviour
     public Key upKey = Key.W;
     public Key downKey = Key.S;
 
-    
+    // For powerup scaling
+    private Vector3 originalSize;
+    private Coroutine sizeRoutine;
+
+    private void Awake()
+    {
+        originalSize = transform.localScale; // Store the size upon starting
+    }
 
     // Update is called once per frame
     void Update()
     {
-        
         if (Keyboard.current[upKey].isPressed)
         {
             Vector3 force = new Vector3(0f, forcedStrength, 0f);
@@ -53,5 +60,27 @@ public class PongPaddle : MonoBehaviour
         // Debug.DrawRay(transform.position, rotatedVector * 5f, Color.red);
         // Debug.DrawRay(transform.position, otherRotatedVector * 5f, Color.green);
         // Debug.DrawRay(transform.position, someOtherRotatedVector * 5f, Color.blue);
+    }
+    
+    // Make the paddles bigger when collecting a powerup
+    public void makePaddlesBigger(float scaleMultiplier, float durationSeconds)
+    {
+        if (sizeRoutine != null)
+        {
+            StopCoroutine(sizeRoutine);
+        }
+        
+        sizeRoutine = StartCoroutine(paddleSizeRoutine(scaleMultiplier, durationSeconds));
+    }
+    
+    private IEnumerator paddleSizeRoutine(float scaleMultiplier, float durationSeconds)
+    {
+        transform.localScale = originalSize * scaleMultiplier;
+        
+        yield return new WaitForSeconds(durationSeconds); // Pause the function
+        
+        // Resume the function
+        transform.localScale = originalSize;
+        sizeRoutine = null;
     }
 }

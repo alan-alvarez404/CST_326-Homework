@@ -8,7 +8,10 @@ public class BallBehaviour : MonoBehaviour
     public float maxAngle = 35f;
     public float minimumYAngle = 0.20f; // Used to properly bounce off top and bottom walls
 
-
+    // For whenever a new ball from the powerup spawns
+    public bool isBonus = false;
+    public int bonusPoints = 3;
+    
     private Rigidbody rb;
     private float currentSpeed;
 
@@ -104,6 +107,7 @@ public class BallBehaviour : MonoBehaviour
             Vector3 reflected = Vector3.Reflect(v, n);
             
             // This was the old logic for trying to reflect the ball off the top and bottom walls
+            // It sucks
             /*
             // Check so that when the ball hits the wall it bounces back in an appropiate angle
             // Before it would appear as if sliding along these walls
@@ -190,5 +194,43 @@ public class BallBehaviour : MonoBehaviour
         float z = Mathf.Sqrt(Mathf.Max(0f, 1f - y * y)) * signZ;
 
         return new Vector3(0f, y, z);
+    }
+    
+    
+    // Following is for the powerup ball behavior specifically
+    public void changeSizeAndSpeed(float sizeMultiplier, float speedMultiplier)
+    {
+        transform.localScale = transform.localScale * sizeMultiplier;
+        
+        currentSpeed = currentSpeed * speedMultiplier;
+
+        if (rb.linearVelocity.sqrMagnitude > 0.0001f)
+        {
+            rb.linearVelocity = rb.linearVelocity.normalized * currentSpeed;
+        }
+    }
+    
+    // Following is for the powerup ball behavior specifically
+    public void spawnBonusBall()
+    {
+        Vector3 spawnPos = transform.position;
+
+        LoadGame ldg = FindFirstObjectByType<LoadGame>();
+        if (ldg != null && ldg.ballSpawn != null)
+        {
+            spawnPos = ldg.ballSpawn.position;
+        }
+
+        GameObject newBall = Instantiate(gameObject, spawnPos, Quaternion.identity);
+
+        BallBehaviour ballBehaviour = newBall.GetComponent<BallBehaviour>();
+        if (ballBehaviour != null)
+        {
+            ballBehaviour.isBonus = true;
+            ballBehaviour.bonusPoints = 3;
+
+            ballBehaviour.currentSpeed = ballBehaviour.ballSpeed;
+            ballBehaviour.StartBall();
+        }
     }
 }
