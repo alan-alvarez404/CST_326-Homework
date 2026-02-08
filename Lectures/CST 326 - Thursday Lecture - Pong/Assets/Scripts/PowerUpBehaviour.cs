@@ -18,7 +18,7 @@ public class PowerUpBehaviour : MonoBehaviour
     private Vector3 rotationSpeed = new Vector3(0f, 0f, 90f);
 
     // For the SlowButBig powerup
-    private float ballScaleMultiplier = 2f;
+    public float ballScaleMultiplier = 1.2f;
     private float ballSpeedMultiplier = 0.5f;
     
     // For the BiggerPaddles powerup

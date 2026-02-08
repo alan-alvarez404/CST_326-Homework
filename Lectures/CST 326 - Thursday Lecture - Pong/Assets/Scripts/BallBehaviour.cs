@@ -15,6 +15,8 @@ public class BallBehaviour : MonoBehaviour
     private Rigidbody rb;
     private float currentSpeed;
 
+    public Material bonusBallMaterial;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -200,9 +202,9 @@ public class BallBehaviour : MonoBehaviour
     // Following is for the powerup ball behavior specifically
     public void changeSizeAndSpeed(float sizeMultiplier, float speedMultiplier)
     {
-        transform.localScale = transform.localScale * sizeMultiplier;
+        transform.localScale *= sizeMultiplier;
         
-        currentSpeed = currentSpeed * speedMultiplier;
+        currentSpeed *= speedMultiplier;
 
         if (rb.linearVelocity.sqrMagnitude > 0.0001f)
         {
@@ -231,6 +233,13 @@ public class BallBehaviour : MonoBehaviour
 
             ballBehaviour.currentSpeed = ballBehaviour.ballSpeed;
             ballBehaviour.StartBall();
+        }
+        
+        // Specifically a different material for the bonus ball
+        Renderer r = newBall.GetComponentInChildren<Renderer>();
+        if (r != null && bonusBallMaterial != null)
+        {
+            r.material = bonusBallMaterial;
         }
     }
 }
