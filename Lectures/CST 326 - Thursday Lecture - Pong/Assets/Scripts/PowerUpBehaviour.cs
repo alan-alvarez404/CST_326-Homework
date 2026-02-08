@@ -11,6 +11,8 @@ public class PowerUpBehaviour : MonoBehaviour
         BonusBall
     }
     
+    private AudioController audioController;
+    
     private PowerUpType type =  PowerUpType.SlowButBig;
     private bool randomizeType = true;
     
@@ -27,6 +29,11 @@ public class PowerUpBehaviour : MonoBehaviour
 
     private bool used;
 
+    private void Awake()
+    {
+        audioController = FindFirstObjectByType<AudioController>();
+    }
+    
     private void Update()
     {
         transform.Rotate(rotationSpeed * Time.deltaTime);
@@ -52,6 +59,11 @@ public class PowerUpBehaviour : MonoBehaviour
         }
 
         used = true; // Powerup is marked as used
+        
+        if (audioController != null)
+        {
+            audioController.PlayPowerUpCollect(); // Play the sound for all three powerups
+        }
 
         PowerUpType chosen = type;
         if (randomizeType) // Should always be true

@@ -16,6 +16,12 @@ public class LoadGame : MonoBehaviour
 
         if (leftScore >= 11)
         {
+            // Play the audio
+            if (AudioController.Instance != null)
+            {
+                AudioController.Instance.PlayPlayerWin();
+            }
+            
             Debug.Log("Game Over, Left Paddle Wins");
             leftScore = 0;
             rightScore = 0;
@@ -28,6 +34,12 @@ public class LoadGame : MonoBehaviour
         Debug.Log("Player 2 scored! Current score: " + rightScore);
         if (rightScore >= 11)
         {
+            // Play the audio
+            if (AudioController.Instance != null)
+            {
+                AudioController.Instance.PlayPlayerWin();
+            }
+            
             Debug.Log("Game Over, Right Paddle Wins");
             leftScore = 0;
             rightScore = 0;

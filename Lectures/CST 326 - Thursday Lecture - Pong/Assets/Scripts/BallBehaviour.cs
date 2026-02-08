@@ -12,6 +12,8 @@ public class BallBehaviour : MonoBehaviour
     public bool isBonus = false;
     public int bonusPoints = 3;
     
+    private bool gameStarted;
+    
     private Rigidbody rb;
     private float currentSpeed;
 
@@ -27,9 +29,12 @@ public class BallBehaviour : MonoBehaviour
     void Start()
     {
         currentSpeed = ballSpeed;
-        StartBall();
-        Debug.Log("Ball Started");
-        Debug.Log("Velocity set to: " + rb.linearVelocity);
+        // Keep the ball frozen 
+        rb.linearVelocity = Vector3.zero;
+
+        // StartBall();
+        // Debug.Log("Ball Started");
+        // Debug.Log("Velocity set to: " + rb.linearVelocity);
     }
     
     // For resetting the ball
@@ -64,6 +69,8 @@ public class BallBehaviour : MonoBehaviour
 
     private void OnCollisionEnter(Collision c)
     {
+        float speed = rb.linearVelocity.magnitude; // Used for pitch calculations relating to audio
+        
         // If the current tag is the player's paddle tag
         if (c.gameObject.CompareTag("Paddle"))
         {
@@ -98,6 +105,13 @@ public class BallBehaviour : MonoBehaviour
             dir = fixMinYReflection(dir);
 
             rb.linearVelocity = dir * currentSpeed;
+            
+            
+            // Play the audio
+            if (AudioController.Instance != null)
+            {
+                AudioController.Instance.PlayPaddleHit(speed);
+            }
             return;
         }
 
@@ -134,6 +148,13 @@ public class BallBehaviour : MonoBehaviour
             
             rb.linearVelocity = dir * currentSpeed;
             Debug.Log("Hit: " + c.gameObject.name + " tag=" + c.gameObject.tag);
+            
+            // Play the audio
+            if (AudioController.Instance != null)
+            {
+                AudioController.Instance.PlayWallHit(speed);
+            }
+            
             return;
         }
     }
@@ -141,6 +162,20 @@ public class BallBehaviour : MonoBehaviour
     // Added to fix the ball's velocity randomly decreasing upon bounce
     private void FixedUpdate()
     {
+        if (!GameState.CanPlay)
+        {
+            rb.linearVelocity = Vector3.zero;
+            return;
+        }
+
+        if (!gameStarted)
+        {
+            StartBall();
+            gameStarted = true;
+        }
+
+        
+        
         if (rb.linearVelocity.sqrMagnitude > 0.0001f)
         {
             rb.linearVelocity = rb.linearVelocity.normalized * currentSpeed;

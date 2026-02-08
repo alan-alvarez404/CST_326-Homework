@@ -28,6 +28,13 @@ public class PongPaddle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Wait to play the game 
+        if (!GameState.CanPlay)
+        {
+            return;
+        }
+        
+        
         if (Keyboard.current[upKey].isPressed)
         {
             Vector3 force = new Vector3(0f, forcedStrength, 0f);

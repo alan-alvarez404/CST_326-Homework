@@ -47,10 +47,22 @@ public class DualTrigger : MonoBehaviour
         if (CompareTag("LeftGoal"))
         {
             loadGame.addPointsToRight(points);
+            
+            // Play the audio
+            if (AudioController.Instance != null)
+            {
+                AudioController.Instance.PlayGoalHit();
+            }
         }
         else if (CompareTag("RightGoal"))
         {
             loadGame.addPointsToLeft(points);
+            
+            // Play the audio
+            if (AudioController.Instance != null)
+            {
+                AudioController.Instance.PlayGoalHit();
+            }
         }
         else
         {

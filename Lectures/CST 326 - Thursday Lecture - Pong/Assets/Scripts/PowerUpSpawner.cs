@@ -48,5 +48,11 @@ public class PowerUpSpawner : MonoBehaviour
         
         Vector3 pos = new Vector3(0f, y, z);
         Instantiate(powerUpPrefab, pos, Quaternion.identity);
+        
+        // Play the audio
+        if (AudioController.Instance != null)
+        {
+            AudioController.Instance.PlayPowerupSpawn();
+        }
     }
 }
