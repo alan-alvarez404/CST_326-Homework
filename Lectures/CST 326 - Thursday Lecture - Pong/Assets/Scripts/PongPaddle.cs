@@ -28,8 +28,8 @@ public class PongPaddle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Wait to play the game 
-        if (!GameState.CanPlay)
+        // Wait to play the game or stop when game is over
+        if (!GameState.CanPlay || GameState.GameOver)
         {
             return;
         }

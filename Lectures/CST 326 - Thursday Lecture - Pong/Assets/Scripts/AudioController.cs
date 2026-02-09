@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class AudioController : MonoBehaviour
@@ -154,5 +155,33 @@ public class AudioController : MonoBehaviour
         backgroundSource.loop = true;
         backgroundSource.Play();
     }
+
+    public void FadeOutBackgroundMusic(float duration)
+    {
+        if (backgroundSource == null)
+        {
+            return;
+        }
+
+        StartCoroutine(FadeOutMusicRoutine(duration));
+    }
+
+    private IEnumerator FadeOutMusicRoutine(float duration)
+    {
+        float startVolume = backgroundSource.volume;
+        float t = 0f;
+
+        while (t < duration)
+        {
+            t += Time.unscaledDeltaTime; // works even if you pause gameplay
+            float a = t / duration;
+            backgroundSource.volume = Mathf.Lerp(startVolume, 0f, a);
+            yield return null;
+        }
+
+        backgroundSource.volume = 0f;
+        backgroundSource.Stop();
+    }
+
 
 }

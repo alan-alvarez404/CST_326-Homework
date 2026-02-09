@@ -26,6 +26,12 @@ public class PowerUpSpawner : MonoBehaviour
 
     private void Update()
     {
+        if (!GameState.CanPlay || GameState.GameOver)
+        {
+            return;
+        }
+        
+        
         spawnTimer += Time.deltaTime;
 
         if (spawnTimer >= spawnTime)

@@ -162,9 +162,10 @@ public class BallBehaviour : MonoBehaviour
     // Added to fix the ball's velocity randomly decreasing upon bounce
     private void FixedUpdate()
     {
-        if (!GameState.CanPlay)
+        if (!GameState.CanPlay || GameState.GameOver)
         {
             rb.linearVelocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
             return;
         }
 
