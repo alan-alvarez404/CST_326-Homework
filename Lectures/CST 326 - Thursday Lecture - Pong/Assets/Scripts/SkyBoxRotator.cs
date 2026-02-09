@@ -10,6 +10,13 @@ public class RotateSkybox : MonoBehaviour
 
     void Update()
     {
+        // Move the skybox until the game starts
+        // Same as other scripts waiting to occur
+        if (!GameState.CanPlay)
+        {
+            return;
+        }
+        
         Material mat = skyboxMaterial != null ? skyboxMaterial : RenderSettings.skybox;
         if (mat == null) return;
 
