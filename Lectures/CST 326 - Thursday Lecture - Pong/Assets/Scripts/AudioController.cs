@@ -163,8 +163,14 @@ public class AudioController : MonoBehaviour
             return;
         }
 
+        if (duration <= 0f)
+        {
+            duration = 0.01f;
+        }
+
         StartCoroutine(FadeOutMusicRoutine(duration));
     }
+
 
     private IEnumerator FadeOutMusicRoutine(float duration)
     {

@@ -27,25 +27,11 @@ public class LoadGame : MonoBehaviour
 
         if (leftScore >= 11)
         {
-            // Play the audio
-            if (AudioController.Instance != null)
-            {
-                AudioController.Instance.PlayPlayerWin();
-            }
-            
-            Debug.Log("Game Over, Left Paddle Wins");
-            // leftScore = 0;
-            // rightScore = 0;
-            
-            GameState.gameOver(true); // Game is over
-            AudioController.Instance.FadeOutBackgroundMusic(fadeDuration); // Fade out the music
-            
-            // This is so that the skybox slows down at the same rate the music fades away
-            RotateSkybox sky = FindFirstObjectByType<RotateSkybox>();
-            if (sky != null) // Make sure a sky is assigned in the first place
-            {
-                sky.slowDownSkybox(fadeDuration);
-            }
+            // Going to move the entirity of what happens inside
+            // this if statement into its own function just to
+            // be reusable.
+            // Pass in a debug statement
+            gameIsWonCleanUp("Game Over, Left Paddle Wins");
         }
     }
 
@@ -62,27 +48,64 @@ public class LoadGame : MonoBehaviour
         
         rightScore += points;
         Debug.Log("Player 2 scored! Current score: " + rightScore);
+        
         if (rightScore >= 11)
         {
-            // Play the audio
-            if (AudioController.Instance != null)
-            {
-                AudioController.Instance.PlayPlayerWin();
-            }
-            
-            Debug.Log("Game Over, Right Paddle Wins");
-            // leftScore = 0;
-            // rightScore = 0;
-            
-            GameState.gameOver(true); // Game is over
-            AudioController.Instance.FadeOutBackgroundMusic(fadeDuration); // Fade out the music
-            
-            // This is so that the skybox slows down at the same rate the music fades away
-            RotateSkybox sky = FindFirstObjectByType<RotateSkybox>();
-            if (sky != null) // Make sure a sky is assigned in the first place
-            {
-                sky.slowDownSkybox(fadeDuration);
-            }
+            // Going to move the entirity of what happens inside
+            // this if statement into its own function just to
+            // be reusable.
+            // Pass in a debug statement
+            gameIsWonCleanUp("Game Over, Right Paddle Wins");
         }
+    }
+    
+    
+    private void gameIsWonCleanUp(string message)
+    {
+        Debug.Log(message);
+
+        // Game is over
+        GameState.gameOver(true);
+
+        // Play the winning sound and fade away the music
+        if (AudioController.Instance != null)
+        {
+            AudioController.Instance.PlayPlayerWin();
+            AudioController.Instance.FadeOutBackgroundMusic(fadeDuration);
+        }
+
+        // Hopefully slow down the skybox to a complete stop
+        RotateSkybox sky = FindFirstObjectByType<RotateSkybox>();
+        if (sky != null)
+        {
+            sky.slowDownSkybox(fadeDuration);
+        }
+
+        // Reset and freeze the paddles
+        PongPaddle[] paddles = FindObjectsByType<PongPaddle>(FindObjectsSortMode.None);
+        int i = 0;
+        while (i < paddles.Length)
+        {
+            if (paddles[i] != null)
+            {
+                paddles[i].resetAndFreezePosition();
+            }
+            i++;
+        }
+
+        // Reset and freeze the ball
+        BallBehaviour[] balls = FindObjectsByType<BallBehaviour>(FindObjectsSortMode.None);
+        i = 0;
+        while (i < balls.Length)
+        {
+            if (balls[i] != null)
+            {
+                balls[i].resetAndFreezePosition();
+            }
+            i++;
+        }
+
+        // leftScore = 0;
+        // rightScore = 0;
     }
 }

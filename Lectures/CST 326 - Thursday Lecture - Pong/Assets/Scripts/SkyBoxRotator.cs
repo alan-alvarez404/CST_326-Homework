@@ -21,7 +21,7 @@ public class RotateSkybox : MonoBehaviour
     {
         // Move the skybox until the game starts
         // Same as other scripts waiting to occur
-        if (!GameState.CanPlay)
+        if (!GameState.CanPlay && !GameState.GameOver)
         {
             return;
         }

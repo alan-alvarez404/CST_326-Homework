@@ -18,11 +18,19 @@ public class BallBehaviour : MonoBehaviour
     private float currentSpeed;
 
     public Material bonusBallMaterial;
+    
+    // For resetting and freezing the ball
+    private Vector3 startPos;
+    private Quaternion startRot;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
         rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
+        
+        // Save the ball's initial position
+        startPos = transform.position;
+        startRot = transform.rotation;
     }
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -50,6 +58,19 @@ public class BallBehaviour : MonoBehaviour
         StartBall();
     }
 
+    // Will be called when a player wins to reset and freeze the ball
+    public void resetAndFreezePosition()
+    {
+        transform.position = startPos;
+        transform.rotation = startRot;
+
+        rb.linearVelocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+
+        currentSpeed = ballSpeed;
+        gameStarted = false;
+    }
+    
     public void StartBall()
     {
         float direction = 1f;
@@ -174,8 +195,6 @@ public class BallBehaviour : MonoBehaviour
             StartBall();
             gameStarted = true;
         }
-
-        
         
         if (rb.linearVelocity.sqrMagnitude > 0.0001f)
         {

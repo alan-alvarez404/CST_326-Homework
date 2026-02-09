@@ -19,11 +19,6 @@ public class GameState : MonoBehaviour
     public static void gameOver(bool gameOver)
     {
         GameOver = gameOver;
-
-        if (gameOver)
-        {
-            CanPlay = false; // Ensure the game can no longer be playable
-        }
     }
 
     public static void ResetGameState()
