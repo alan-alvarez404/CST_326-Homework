@@ -7,8 +7,8 @@ public class PongPaddle : MonoBehaviour
     public float paddleSpeed = 1f;
     public float forcedStrength = 10f;
 
-    public Key upKey = Key.W;
-    public Key downKey = Key.S;
+    // Replaced the up and down keys to utilize inputActions
+    public InputActionReference moveAction; 
 
     // For powerup scaling
     private Vector3 originalSize;
@@ -28,6 +28,22 @@ public class PongPaddle : MonoBehaviour
 
         rb = GetComponent<Rigidbody>();
     }
+    
+    private void OnEnable()
+    {
+        if (moveAction != null)
+        {
+            moveAction.action.Enable();
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (moveAction != null)
+        {
+            moveAction.action.Disable();
+        }
+    }
 
     // Update is called once per frame
     void Update()
@@ -37,26 +53,26 @@ public class PongPaddle : MonoBehaviour
         {
             return;
         }
-        
-        if (Keyboard.current[upKey].isPressed)
+
+        // In case the moveAction was never assigned        
+        if (moveAction == null)
         {
-            Vector3 force = new Vector3(0f, forcedStrength, 0f);
-            
-            // Moved the line that sets the rigidbody to the Awake method
-            if (rb != null)
-            {
-                rb.AddForce(force, ForceMode.Force);
-            }
+            return;
         }
 
-        if (Keyboard.current[downKey].isPressed)
+        
+        // This section utilizes inputActions
+        float move = moveAction.action.ReadValue<float>(); // -1 to +1
+
+        if (move > 0.1f)
+        {
+            Vector3 force = new Vector3(0f, forcedStrength, 0f);
+            rb.AddForce(force, ForceMode.Force);
+        }
+        else if (move < -0.1f)
         {
             Vector3 force = new Vector3(0f, -forcedStrength, 0f);
-            
-            if (rb != null)
-            {
-                rb.AddForce(force, ForceMode.Force);
-            }
+            rb.AddForce(force, ForceMode.Force);
         }
     }
     

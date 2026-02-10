@@ -412,8 +412,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PongPaddle
   paddleSpeed: 4
   forcedStrength: 16
-  upKey: 37
-  downKey: 33
+  moveAction: {fileID: 1206776770}
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -713,8 +712,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PongPaddle
   paddleSpeed: 4
   forcedStrength: 16
-  upKey: 63
-  downKey: 64
+  moveAction: {fileID: 2096280845}
 --- !u!54 &438873809
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1269,6 +1267,20 @@ MonoBehaviour:
   powerUpPrefab: {fileID: 6994136048087086934, guid: 48ec2c69b5dcd644481c390de5242f1f, type: 3}
   spawnTime: 10
   spawnOnStart: 0
+--- !u!114 &1206776770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc1515ab76e54f068e2f2207940fab32, type: 3}
+  m_Name: LeftPaddleMove/Movement Action
+  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.InputActionReference
+  m_Asset: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  m_ActionId: 3996fdc7-91bd-4cec-9e82-a0bd39e589e9
 --- !u!1 &1214121201
 GameObject:
   m_ObjectHideFlags: 0
@@ -2428,6 +2440,20 @@ MonoBehaviour:
   leftStatusText: {fileID: 1714164242}
   rightScoreText: {fileID: 110176587}
   rightStatusText: {fileID: 1576825953}
+--- !u!114 &2096280845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc1515ab76e54f068e2f2207940fab32, type: 3}
+  m_Name: RightPaddleMove/Movement Action
+  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.InputActionReference
+  m_Asset: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  m_ActionId: 4c990fb0-f989-4d7a-a0b7-e70e85c2d0ee
 --- !u!1 &2126099948
 GameObject:
   m_ObjectHideFlags: 0
