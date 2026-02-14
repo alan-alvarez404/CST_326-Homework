@@ -5,11 +5,11 @@ public class TimeController : MonoBehaviour
 {
     public TextMeshProUGUI timeText;
 
-    public float timeLeft = 500;
+    public float timeLeft = 400;
 
     void Update()
     {
-        timeLeft -= Time.deltaTime;
+        timeLeft -= Time.deltaTime * 3;
         timeText.text = $"TIME\n {((int)timeLeft).ToString()}";
     }
 }
