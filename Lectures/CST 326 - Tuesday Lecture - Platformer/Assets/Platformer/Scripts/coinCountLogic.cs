@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
 
-public class coinCountLogic : MonoBehaviour
+public class CoinCountLogic : MonoBehaviour
 {
     public Camera rayCamera;
     public int coinCount;
@@ -38,7 +38,7 @@ public class coinCountLogic : MonoBehaviour
                     coinCountText.text = $"Ox{coinCount:00}"; // Update the coin display
                     // This stays as Ox00 up until it hits Ox10 and so on
                     
-                    Debug.Log("Question Block at Position: " + hit.point + " was hit"); // Print the position of whatever question block was hit
+                    Debug.Log("Question Block at Position: " + hit.transform.position + " was hit"); // Print the position of whatever question block was hit
                     Debug.DrawRay(screenRay.origin, screenRay.direction * 100f, Color.green, 0.5f); // Draw a debug ray for half a second
                 }
                 else
