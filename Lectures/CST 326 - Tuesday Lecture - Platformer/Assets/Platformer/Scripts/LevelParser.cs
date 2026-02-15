@@ -87,6 +87,7 @@ public class LevelParser : MonoBehaviour
                     Vector3 newPosition = new Vector3(columnIndex + 0.5f, row + 0.5f, 0);
                     Transform rockInstance = Instantiate(brickPrefab, levelRoot).transform;
                     rockInstance.position = newPosition;
+                    rockInstance.tag = "Brick"; // Tag the bricks with a Brick tag for destruction
                 }
                 
                 if (currentChar == 's')

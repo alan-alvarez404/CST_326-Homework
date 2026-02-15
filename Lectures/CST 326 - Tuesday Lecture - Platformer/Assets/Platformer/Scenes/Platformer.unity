@@ -934,6 +934,51 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TimeController
   timeText: {fileID: 1369212371}
   timeLeft: 400
+--- !u!1 &1519371336
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1519371338}
+  - component: {fileID: 1519371337}
+  m_Layer: 0
+  m_Name: Platformer Logic
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1519371337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1519371336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 937e8bb1df92ad8438b6563a9543eae8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BrickLogic
+  rayCamera: {fileID: 963194227}
+--- !u!4 &1519371338
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1519371336}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 77.1652, y: 0, z: 12.83245}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1548122765
 GameObject:
   m_ObjectHideFlags: 0
@@ -1323,6 +1368,7 @@ SceneRoots:
   - {fileID: 406602702}
   - {fileID: 922125655}
   - {fileID: 610288774}
+  - {fileID: 1519371338}
   - {fileID: 1718817037}
   - {fileID: 1548122769}
   - {fileID: 288395991}
