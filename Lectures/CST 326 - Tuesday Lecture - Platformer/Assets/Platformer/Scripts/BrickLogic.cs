@@ -25,7 +25,12 @@ public class BrickLogic : MonoBehaviour
                 if (hit.collider != null && hit.collider.CompareTag("Brick"))
                 {
                     Destroy(hit.collider.gameObject); // Destroy any object tagged Brick if ray intersects with it
-                    Debug.Log("Brick at Position: " + hit.point + " was destroyed");
+                    Debug.Log("Brick at Position: " + hit.point + " was destroyed"); // Print the position of whatever brick was destroyed
+                    Debug.DrawRay(screenRay.origin, screenRay.direction * 100f, Color.red, 0.5f); // Draw a debug ray for half a second
+                }
+                else
+                {
+                    Debug.DrawRay(screenRay.origin, screenRay.direction * 100f, Color.yellow, 0.5f); // Draw a debug ray when you hit something that's not a brick
                 }
             }
         }
