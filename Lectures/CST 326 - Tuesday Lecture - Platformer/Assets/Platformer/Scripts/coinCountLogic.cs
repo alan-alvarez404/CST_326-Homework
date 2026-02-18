@@ -39,11 +39,11 @@ public class CoinCountLogic : MonoBehaviour
                     // This stays as Ox00 up until it hits Ox10 and so on
                     
                     Debug.Log("Question Block at Position: " + hit.transform.position + " was hit"); // Print the position of whatever question block was hit
-                    Debug.DrawRay(screenRay.origin, screenRay.direction * 100f, Color.green, 0.5f); // Draw a debug ray for half a second
+                    // Debug.DrawRay(screenRay.origin, screenRay.direction * 100f, Color.green, 0.5f); // Draw a debug ray for half a second
                 }
                 else
                 {
-                    Debug.DrawRay(screenRay.origin, screenRay.direction * 100f, Color.yellow, 0.5f); // Draw a debug ray when you hit something that's not a brick
+                    // Debug.DrawRay(screenRay.origin, screenRay.direction * 100f, Color.yellow, 0.5f); // Draw a debug ray when you hit something that's not a brick
                 }
             }
         }

@@ -26,7 +26,7 @@ public class BrickLogic : MonoBehaviour
                 {
                     Destroy(hit.collider.gameObject); // Destroy any object tagged Brick if ray intersects with it
                     Debug.Log("Brick at Position: " + hit.transform.position + " was destroyed"); // Print the position of whatever brick was destroyed
-                    Debug.DrawRay(screenRay.origin, screenRay.direction * 100f, Color.red, 0.5f); // Draw a debug ray for half a second
+                    // Debug.DrawRay(screenRay.origin, screenRay.direction * 100f, Color.red, 0.5f); // Draw a debug ray for half a second
                 }
                 else
                 {
