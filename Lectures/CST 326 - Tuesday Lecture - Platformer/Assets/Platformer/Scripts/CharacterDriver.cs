@@ -13,6 +13,7 @@ public class CharacterDriver : MonoBehaviour
     
     Vector2 _velocity;
     CharacterController _controller;
+    Animator _animator;
     Quaternion facingLeft;
     Quaternion facingRight;
     
@@ -21,6 +22,7 @@ public class CharacterDriver : MonoBehaviour
     {
         facingRight = Quaternion.identity;
         facingLeft = Quaternion.Euler(0f, 180f, 0f);
+        _animator = GetComponent<Animator>();
         
         _controller =  GetComponent<CharacterController>();
     }
@@ -84,7 +86,9 @@ public class CharacterDriver : MonoBehaviour
         {
             _velocity.x = 0f;
         }
-        
+
+        _animator.SetFloat("Speed", _velocity.x);
+
         // Debug.Log($"Grounded: {_controller.isGrounded}"); // This runs every frame. Jesus Christ
     }
 }
