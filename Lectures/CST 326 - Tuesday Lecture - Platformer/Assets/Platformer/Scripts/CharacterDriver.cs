@@ -10,9 +10,11 @@ public class CharacterDriver : MonoBehaviour
 
     public float airAcceleration = 0.5f;
     public float apexHeight = 4.5f;
-    public float apexTime = 0.5f;
+    public float apexTime = 0.75f; // Default SHOULD BE 0.75
     
     CharacterController _controller;
+    
+    Animator _animator;
 
     float _velocityX;
     float _velocityY;   
@@ -25,7 +27,7 @@ public class CharacterDriver : MonoBehaviour
     {
         facingRight = Quaternion.Euler(0f, 90f, 0f);
         facingLeft = Quaternion.Euler(0f, -90f, 0f);
-        
+        _animator = GetComponent<Animator>();
         _controller =  GetComponent<CharacterController>();
     }
 
@@ -81,7 +83,8 @@ public class CharacterDriver : MonoBehaviour
         if ((collisions & CollisionFlags.Above) != 0 && _velocityY > 0f) _velocityY = 0f;
         if ((collisions & CollisionFlags.Sides) != 0) _velocityX = 0f;
 
-        // _animator.SetFloat("Speed", _velocity.x);
+        _animator.SetFloat("Speed", Mathf.Abs(_velocityX));
+        _animator.SetBool("isGrounded", _controller.isGrounded);
 
         // Debug.Log($"Grounded: {_controller.isGrounded}"); // This runs every frame. Jesus Christ
     }
