@@ -8,9 +8,10 @@ public class CharacterDriver : MonoBehaviour
     public float runSpeed = 10f;
     public float groundAcceleration = 1f;
 
-    public float airAcceleration = 0.5f;
+    public float airAcceleration = 15f; // 0.5 might be too small, switch to 1.0
+    public float airDeceleration = 10f; // Needed for slowing the player down mid air if they dont hold a movement key(?)
     public float apexHeight = 4.5f;
-    public float apexTime = 0.75f; // Default SHOULD BE 0.75
+    public float apexTime = 0.7f; // Default SHOULD BE 0.7
     
     CharacterController _controller;
     
@@ -18,6 +19,8 @@ public class CharacterDriver : MonoBehaviour
 
     float _velocityX;
     float _velocityY;   
+    
+    public float yMaxFallSpeed = -25f; // Needed for clamping the Y
     
     Quaternion facingLeft;
     Quaternion facingRight;
@@ -55,7 +58,7 @@ public class CharacterDriver : MonoBehaviour
 
             if (jumpPressedThisFrame)
             {
-                float jumpImpulse = 2f * apexHeight / apexTime;
+                float jumpImpulse = 2f * apexHeight / (apexTime);
                 _velocityY = jumpImpulse;
             } else if (_velocityY < 0f)
             {
@@ -68,12 +71,27 @@ public class CharacterDriver : MonoBehaviour
             
             if (!jumpHeld) gravity *= 2f;
             _velocityY += gravity * Time.deltaTime;
-            _velocityX += direction * airAcceleration * Time.deltaTime;
+            //_velocityX += direction * airAcceleration * Time.deltaTime;
+            
+            // Calculation so that the player's momentum/direction can be changed mid air rather than going in
+            // the same direction if they gain speed and jump without being able to change it with movement keys.
+            if (direction != 0f)
+            {
+                _velocityX += direction * airAcceleration * Time.deltaTime;
+                transform.rotation = (direction > 0f) ? facingRight : facingLeft; // Change direction mid air (don't know if old mario behaves like this)
+            }
+            else
+            {
+                _velocityX = Mathf.MoveTowards(_velocityX, 0f, airDeceleration * Time.deltaTime);
+            }
         }
         
         // Speed clamping
         float xMaxSpeed = runHeld ? runSpeed : walkSpeed;
         _velocityX = Mathf.Clamp(_velocityX,-xMaxSpeed, xMaxSpeed);
+        
+        // Clamping the speed at which the player falls
+        _velocityY = Mathf.Max(_velocityY, yMaxFallSpeed);
         
         Vector3 deltaPosition = new Vector3(_velocityX, _velocityY, 0f) * Time.deltaTime;
         
