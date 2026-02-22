@@ -35,13 +35,6 @@ public class BrickLogic : MonoBehaviour
             }
         }
     }
-        
-    // Will be called by another script
-    public void Break()
-    {
-        ScoreCounter.AddScore(100);
-        Destroy(gameObject);
-    }
     
     public static void CheckForBrick(CharacterController controller, Transform playerTransform)
     {
