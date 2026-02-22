@@ -28,12 +28,29 @@ public class CharacterDriver : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        instance = this;
+        
         _facingRight = Quaternion.Euler(0f, 90f, 0f);
         _facingLeft = Quaternion.Euler(0f, -90f, 0f);
         _animator = GetComponent<Animator>();
         _controller =  GetComponent<CharacterController>();
     }
 
+    // Have to do this to be able to stop time in the next method properly
+    private static CharacterDriver instance;
+    
+    public static void StopTheMario()
+    {
+        // Make it so mario's transform and momentum freezes
+
+        instance._velocityX = 0f;
+        instance._velocityY = 0f;
+        
+        // Disable the entire movement scripting inside of Update
+        instance.enabled = false;
+
+    }
+    
     // Update is called once per frame
     void Update()
     {
@@ -104,7 +121,18 @@ public class CharacterDriver : MonoBehaviour
 
             _velocityY = 0f;
         }
-        if ((collisions & CollisionFlags.Sides) != 0) _velocityX = 0f;
+
+        if ((collisions & CollisionFlags.Sides) != 0)
+        {
+            FlagpoleLogic.CheckForWin(_controller, transform); // Callable method to check if player hits flagpole
+            _velocityX = 0f;
+        }
+        
+        // Only check collisions from below without affecting the velocities (hopefully)
+        if ((collisions & CollisionFlags.Below) != 0)
+        {
+            FlagpoleLogic.CheckForWin(_controller, transform); // Callable method to check if player hits flagpole
+        }
 
         _animator.SetFloat("Speed", Mathf.Abs(_velocityX));
         _animator.SetBool("isGrounded", _controller.isGrounded);

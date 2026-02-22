@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Brick
   - Question
+  - Flag Top
+  - Flag Pole
   layers:
   - Default
   - TransparentFX

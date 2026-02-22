@@ -417,6 +417,8 @@ MonoBehaviour:
   questionBoxPrefab: {fileID: 5799443028170779054, guid: b78a6e8ea8fc4c64ba739efb2f1097e4, type: 3}
   usedQuestionBoxPrefab: {fileID: 4154436690281689390, guid: 828d99f3ce472d24aa8e7d01d212460d, type: 3}
   strongPrefab: {fileID: 5299989590279812567, guid: 5bc17519710e381418940deb56636430, type: 3}
+  flagTopPrefab: {fileID: 4154436690281689390, guid: 1b2b9c37dc05c554ab98f8ef13d5afaf, type: 3}
+  flagPolePrefab: {fileID: 4154436690281689390, guid: 281cb9456fe1d634297da4e39bd43b3e, type: 3}
 --- !u!4 &610288774
 Transform:
   m_ObjectHideFlags: 0
@@ -1026,7 +1028,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TimeController
   timeText: {fileID: 1369212371}
-  timeLeft: 400
+  timeLeft: 100
 --- !u!1 &1519371336
 GameObject:
   m_ObjectHideFlags: 0
@@ -1038,6 +1040,8 @@ GameObject:
   - component: {fileID: 1519371338}
   - component: {fileID: 1519371337}
   - component: {fileID: 1519371339}
+  - component: {fileID: 1519371340}
+  - component: {fileID: 1519371341}
   m_Layer: 0
   m_Name: Platformer Logic
   m_TagString: Untagged
@@ -1086,6 +1090,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScoreCounter
   scoreCountText: {fileID: 927520147}
+--- !u!114 &1519371340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1519371336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5c7ebabccdd3c04fb5ac3fdfb9a075a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HotSwapper
+  usedQuestionBlockPrefab: {fileID: 4154436690281689390, guid: 828d99f3ce472d24aa8e7d01d212460d, type: 3}
+--- !u!114 &1519371341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1519371336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 994f8254da857464c8f359e9cd40240d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlagpoleLogic
+  flagTopPrefab: {fileID: 4154436690281689390, guid: 1b2b9c37dc05c554ab98f8ef13d5afaf, type: 3}
+  flagPolePrefab: {fileID: 4154436690281689390, guid: 281cb9456fe1d634297da4e39bd43b3e, type: 3}
 --- !u!1 &1548122765
 GameObject:
   m_ObjectHideFlags: 0
@@ -1277,7 +1308,7 @@ Transform:
   m_GameObject: {fileID: 1596591423}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 17.47, y: 1.17, z: 0}
+  m_LocalPosition: {x: 17.47, y: 1.17, z: 3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -40,6 +40,8 @@ public class LevelParser : MonoBehaviour
     public GameObject questionBoxPrefab;
     public GameObject usedQuestionBoxPrefab;
     public GameObject strongPrefab;
+    public GameObject flagTopPrefab;
+    public GameObject flagPolePrefab;
 
     void Start()
     {
@@ -104,6 +106,22 @@ public class LevelParser : MonoBehaviour
                     Transform rockInstance = Instantiate(questionBoxPrefab, levelRoot).transform;
                     rockInstance.position = newPosition;
                     rockInstance.tag = "Question"; // Tag the bricks with a Question tag for coin count
+                }
+                
+                // These two are for the flagpole
+                if (currentChar == 't')
+                {
+                    Vector3 newPosition = new Vector3(columnIndex + 0.5f, row + 0.5f, 0);
+                    Transform flagTopInstance = Instantiate(flagTopPrefab, levelRoot).transform;
+                    flagTopInstance.position = newPosition;
+                    flagTopInstance.tag = "Flag Top"; // Tag the bricks with a Question tag for coin count
+                }
+                if (currentChar == 'p')
+                {
+                    Vector3 newPosition = new Vector3(columnIndex + 0.5f, row + 0.5f, 0);
+                    Transform flagPoleInstance = Instantiate(flagPolePrefab, levelRoot).transform;
+                    flagPoleInstance.position = newPosition;
+                    flagPoleInstance.tag = "Flag Pole"; // Tag the bricks with a Question tag for coin count
                 }
                 
                 
