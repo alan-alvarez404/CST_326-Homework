@@ -72,9 +72,10 @@ public class CoinCountLogic : MonoBehaviour
                 ScoreCounter.AddScore(100);
                 AddCoin(); // Call function to add a coin
                 
-                Debug.Log("Question Block at Position: " + hit.transform.position + " was hit"); // Print the position of whatever question block was hit
+                // Debug.Log("Question Block at Position: " + hit.transform.position + " was hit"); // Print the position of whatever question block was hit
 
-                Destroy(hit.collider.transform.gameObject);
+                // Pass in the question block and its tag to be swapped
+                HotSwapper.SwapOutBlock(hit.collider.gameObject, hit.collider.tag);
             }
         }
     }

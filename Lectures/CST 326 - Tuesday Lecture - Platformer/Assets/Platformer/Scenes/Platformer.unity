@@ -415,6 +415,7 @@ MonoBehaviour:
   rockPrefab: {fileID: 7963238016420103157, guid: bbe45a4a8623d1240941e8326e8de90c, type: 3}
   brickPrefab: {fileID: 4154436690281689390, guid: 1af9a7674aa694e4bb84d4873e2f084b, type: 3}
   questionBoxPrefab: {fileID: 5799443028170779054, guid: b78a6e8ea8fc4c64ba739efb2f1097e4, type: 3}
+  usedQuestionBoxPrefab: {fileID: 4154436690281689390, guid: 828d99f3ce472d24aa8e7d01d212460d, type: 3}
   strongPrefab: {fileID: 5299989590279812567, guid: 5bc17519710e381418940deb56636430, type: 3}
 --- !u!4 &610288774
 Transform:
@@ -1466,7 +1467,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::coinCountLogic
   rayCamera: {fileID: 963194227}
-  coinCount: 0
   coinCountText: {fileID: 2050597839}
 --- !u!114 &2050597842
 MonoBehaviour:
