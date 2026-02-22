@@ -54,6 +54,6 @@ public class BrickLogic : MonoBehaviour
             }
         }
         
-        Debug.DrawRay(playerCenter, Vector3.up * distance, Color.red, 0.1f);
+        // Debug.DrawRay(playerCenter, Vector3.up * distance, Color.red, 0.1f);
     }
 }

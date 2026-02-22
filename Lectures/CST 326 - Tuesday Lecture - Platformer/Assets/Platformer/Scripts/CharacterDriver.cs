@@ -100,6 +100,8 @@ public class CharacterDriver : MonoBehaviour
         if ((collisions & CollisionFlags.Above) != 0 && _velocityY > 0f)
         {
             BrickLogic.CheckForBrick(_controller, transform); // Callable method to check if whatever the player collides with is a brick
+            CoinCountLogic.CheckForCB(_controller, transform); // Callable method to check if whatever the player collides with is a coin block
+
             _velocityY = 0f;
         }
         if ((collisions & CollisionFlags.Sides) != 0) _velocityX = 0f;
