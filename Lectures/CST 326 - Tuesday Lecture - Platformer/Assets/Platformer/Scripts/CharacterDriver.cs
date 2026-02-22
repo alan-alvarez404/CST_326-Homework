@@ -132,6 +132,8 @@ public class CharacterDriver : MonoBehaviour
         if ((collisions & CollisionFlags.Below) != 0)
         {
             FlagpoleLogic.CheckForWin(_controller, transform); // Callable method to check if player hits flagpole
+            WaterBlockLogic.CheckForWater(_controller, transform); // Callable method to check if player hits a dangerous water block
+
         }
 
         _animator.SetFloat("Speed", Mathf.Abs(_velocityX));

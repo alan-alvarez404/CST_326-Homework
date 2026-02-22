@@ -38,8 +38,8 @@ public class LevelParser : MonoBehaviour
     public GameObject rockPrefab;
     public GameObject brickPrefab;
     public GameObject questionBoxPrefab;
-    public GameObject usedQuestionBoxPrefab;
     public GameObject strongPrefab;
+    public GameObject waterPrefab;
     public GameObject flagTopPrefab;
     public GameObject flagPolePrefab;
 
@@ -106,6 +106,15 @@ public class LevelParser : MonoBehaviour
                     Transform rockInstance = Instantiate(questionBoxPrefab, levelRoot).transform;
                     rockInstance.position = newPosition;
                     rockInstance.tag = "Question"; // Tag the bricks with a Question tag for coin count
+                }
+                
+                // This is the only object that should ideally "destroy" the player
+                if (currentChar == 'w')
+                {
+                    Vector3 newPosition = new Vector3(columnIndex + 0.5f, row + 0.5f, 0);
+                    Transform waterInstance = Instantiate(waterPrefab, levelRoot).transform;
+                    waterInstance.position = newPosition;
+                    waterInstance.tag = "Water"; // Tag the bricks with a Water tag
                 }
                 
                 // These two are for the flagpole

@@ -8,6 +8,7 @@ TagManager:
   - Question
   - Flag Top
   - Flag Pole
+  - Water
   layers:
   - Default
   - TransparentFX
