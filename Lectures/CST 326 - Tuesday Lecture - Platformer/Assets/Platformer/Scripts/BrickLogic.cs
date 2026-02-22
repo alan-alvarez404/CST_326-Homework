@@ -12,7 +12,7 @@ public class BrickLogic : MonoBehaviour
             rayCamera = Camera.main; // Assign the main camera if not assigned yet
         }
     }
-
+    
     void Update()
     {
         Vector3 mousePosition = Mouse.current.position.value;
@@ -24,16 +24,43 @@ public class BrickLogic : MonoBehaviour
             {
                 if (hit.collider != null && hit.collider.CompareTag("Brick"))
                 {
-                    Destroy(hit.collider.gameObject); // Destroy any object tagged Brick if ray intersects with it
+                    // Destroy any object tagged Brick if ray intersects with it
+                    Destroy(hit.collider.transform.gameObject);
+                    
+                    // Add score
+                    ScoreCounter.AddScore(100);
+
                     Debug.Log("Brick at Position: " + hit.transform.position + " was destroyed"); // Print the position of whatever brick was destroyed
-                    // Debug.DrawRay(screenRay.origin, screenRay.direction * 100f, Color.red, 0.5f); // Draw a debug ray for half a second
-                }
-                else
-                {
-                    // Debug.DrawRay(screenRay.origin, screenRay.direction * 100f, Color.yellow, 0.5f); // Draw a debug ray when you hit something that's not a brick
                 }
             }
         }
+    }
         
+    // Will be called by another script
+    public void Break()
+    {
+        ScoreCounter.AddScore(100);
+        Destroy(gameObject);
+    }
+    
+    public static void CheckForBrick(CharacterController controller, Transform playerTransform)
+    {
+        // Center of the Mario
+        Vector3 playerCenter = playerTransform.TransformPoint(controller.center);
+        
+        // Distance from that center to a little above the Mario (needed for the following)
+        float distance = (controller.height * 0.5f) + 0.1f;
+        
+        // Cast the ray directly upwards, check for brick
+        if (Physics.Raycast(playerCenter, Vector3.up, out RaycastHit hit, distance))
+        {
+            if (hit.collider != null && hit.collider.CompareTag("Brick"))
+            {
+                ScoreCounter.AddScore(100);
+                Destroy(hit.collider.transform.gameObject);
+            }
+        }
+        
+        Debug.DrawRay(playerCenter, Vector3.up * distance, Color.red, 0.1f);
     }
 }

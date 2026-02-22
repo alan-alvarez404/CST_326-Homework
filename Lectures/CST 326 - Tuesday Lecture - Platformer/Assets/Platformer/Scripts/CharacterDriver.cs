@@ -8,8 +8,8 @@ public class CharacterDriver : MonoBehaviour
     public float runSpeed = 10f;
     public float groundAcceleration = 1f;
 
-    public float airAcceleration = 15f; // 0.5 might be too small, switch to 1.0
-    public float airDeceleration = 10f; // Needed for slowing the player down mid air if they dont hold a movement key(?)
+    public float airAcceleration = 15f; // Default SHOULD be 15f
+    public float airDeceleration = 10f; // Needed for slowing the player down midair if they don't hold a movement key (default is 10f)
     public float apexHeight = 4.5f;
     public float apexTime = 0.7f; // Default SHOULD BE 0.7
     
@@ -22,14 +22,14 @@ public class CharacterDriver : MonoBehaviour
     
     public float yMaxFallSpeed = -25f; // Needed for clamping the Y
     
-    Quaternion facingLeft;
-    Quaternion facingRight;
+    Quaternion _facingLeft;
+    Quaternion _facingRight;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        facingRight = Quaternion.Euler(0f, 90f, 0f);
-        facingLeft = Quaternion.Euler(0f, -90f, 0f);
+        _facingRight = Quaternion.Euler(0f, 90f, 0f);
+        _facingLeft = Quaternion.Euler(0f, -90f, 0f);
         _animator = GetComponent<Animator>();
         _controller =  GetComponent<CharacterController>();
     }
@@ -49,7 +49,7 @@ public class CharacterDriver : MonoBehaviour
             if (direction != 0)
             {
                 _velocityX += direction * groundAcceleration * Time.deltaTime;
-                transform.rotation = (direction > 0f) ? facingRight : facingLeft;
+                transform.rotation = (direction > 0f) ? _facingRight : _facingLeft;
             }
             else
             {
@@ -71,14 +71,13 @@ public class CharacterDriver : MonoBehaviour
             
             if (!jumpHeld) gravity *= 2f;
             _velocityY += gravity * Time.deltaTime;
-            //_velocityX += direction * airAcceleration * Time.deltaTime;
             
-            // Calculation so that the player's momentum/direction can be changed mid air rather than going in
+            // Calculation so that the player's momentum/direction can be changed midair rather than going in
             // the same direction if they gain speed and jump without being able to change it with movement keys.
             if (direction != 0f)
             {
                 _velocityX += direction * airAcceleration * Time.deltaTime;
-                transform.rotation = (direction > 0f) ? facingRight : facingLeft; // Change direction mid air (don't know if old mario behaves like this)
+                transform.rotation = (direction > 0f) ? _facingRight : _facingLeft; // Change direction midair (don't know if old mario behaves like this)
             }
             else
             {
@@ -98,7 +97,11 @@ public class CharacterDriver : MonoBehaviour
         CollisionFlags collisions = _controller.Move(deltaPosition);
         
         // Reset movement velocities based on object collisions
-        if ((collisions & CollisionFlags.Above) != 0 && _velocityY > 0f) _velocityY = 0f;
+        if ((collisions & CollisionFlags.Above) != 0 && _velocityY > 0f)
+        {
+            BrickLogic.CheckForBrick(_controller, transform); // Callable method to check if whatever the player collides with is a brick
+            _velocityY = 0f;
+        }
         if ((collisions & CollisionFlags.Sides) != 0) _velocityX = 0f;
 
         _animator.SetFloat("Speed", Mathf.Abs(_velocityX));

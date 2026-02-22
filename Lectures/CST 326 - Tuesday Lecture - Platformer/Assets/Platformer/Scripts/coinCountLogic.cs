@@ -23,7 +23,7 @@ public class CoinCountLogic : MonoBehaviour
         }
     }
 
-    void Update()
+    void Update()   
     {
         Vector3 mousePosition = Mouse.current.position.value;
         Ray screenRay = rayCamera.ScreenPointToRay(mousePosition);
@@ -41,12 +41,7 @@ public class CoinCountLogic : MonoBehaviour
                     Debug.Log("Question Block at Position: " + hit.transform.position + " was hit"); // Print the position of whatever question block was hit
                     // Debug.DrawRay(screenRay.origin, screenRay.direction * 100f, Color.green, 0.5f); // Draw a debug ray for half a second
                 }
-                else
-                {
-                    // Debug.DrawRay(screenRay.origin, screenRay.direction * 100f, Color.yellow, 0.5f); // Draw a debug ray when you hit something that's not a brick
-                }
             }
         }
-        
     }
 }
