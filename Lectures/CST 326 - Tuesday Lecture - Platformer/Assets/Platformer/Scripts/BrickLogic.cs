@@ -5,12 +5,16 @@ public class BrickLogic : MonoBehaviour
 {
     public Camera rayCamera;
 
+    private AudioController audioController;
+    
     void Awake()
     {
         if (rayCamera == null)
         {
             rayCamera = Camera.main; // Assign the main camera if not assigned yet
         }
+        
+        audioController = AudioController.Instance;
     }
     
     void Update()
@@ -29,6 +33,8 @@ public class BrickLogic : MonoBehaviour
                     
                     // Add score
                     ScoreCounter.AddScore(100);
+                    
+                    AudioController.Instance?.PlayBreakBrickBlock(); // Play the brick breaking sound
 
                     Debug.Log("Brick at Position: " + hit.transform.position + " was destroyed"); // Print the position of whatever brick was destroyed
                 }
@@ -51,6 +57,7 @@ public class BrickLogic : MonoBehaviour
             {
                 ScoreCounter.AddScore(100);
                 Destroy(hit.collider.transform.gameObject);
+                AudioController.Instance?.PlayBreakBrickBlock(); // Play the brick breaking sound
             }
         }
         

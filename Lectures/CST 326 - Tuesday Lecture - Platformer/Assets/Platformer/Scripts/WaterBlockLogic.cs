@@ -37,6 +37,13 @@ public class WaterBlockLogic : MonoBehaviour
     // Callable method that handles stopping the timer and the Mario
     public static void Lose()
     {
+        if (AudioController.Instance != null)
+        {
+            AudioController.Instance.StopBackgroundMusicLoop(); // Stop the background music for the next sound to be heard
+            AudioController.Instance.PlayLoseMusic(); // Play the sound when Mario drowns
+        }
+
+        
         Debug.Log("Game Over: Fell into water");
 
         // This is needed so that Mario continues to fall through water at a slow rate

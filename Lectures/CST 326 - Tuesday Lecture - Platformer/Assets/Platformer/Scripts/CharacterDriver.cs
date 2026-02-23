@@ -24,6 +24,8 @@ public class CharacterDriver : MonoBehaviour
     
     Animator _animator;
 
+    private AudioController audioController;
+    
     float _velocityX;
     float _velocityY;   
     
@@ -41,6 +43,8 @@ public class CharacterDriver : MonoBehaviour
         _facingLeft = Quaternion.Euler(0f, -90f, 0f);
         _animator = GetComponent<Animator>();
         _controller =  GetComponent<CharacterController>();
+        
+        audioController = AudioController.Instance;
     }
 
     // Have to do this to be able to stop time in the next method properly
@@ -105,6 +109,12 @@ public class CharacterDriver : MonoBehaviour
 
             if (jumpPressedThisFrame)
             {
+                if (audioController != null)
+                {
+                    audioController.PlayMarioJump(); // Play the sound for when Mario jumps
+                }
+                
+                
                 float jumpImpulse = 2f * apexHeight / (apexTime);
                 _velocityY = jumpImpulse;
             } else if (_velocityY < 0f)

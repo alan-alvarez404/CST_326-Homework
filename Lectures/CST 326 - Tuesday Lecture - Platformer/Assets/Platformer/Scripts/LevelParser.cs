@@ -43,9 +43,17 @@ public class LevelParser : MonoBehaviour
     public GameObject flagTopPrefab;
     public GameObject flagPolePrefab;
 
+    private AudioController audioController;
+
+    
     void Start()
     {
         LoadLevel();
+        
+        if (audioController != null)
+        {
+            audioController.PlayBackgroundMusicLoop(); // Play the background music
+        }
     }
 
     void Update()
@@ -76,8 +84,7 @@ public class LevelParser : MonoBehaviour
                 // Todo - Instantiate a new GameObject that matches the type specified by the character
                 // Todo - Position the new GameObject at the appropriate location by using row and column
                 // Todo - Parent the new GameObject under levelRoot
-
-
+                
                 if (currentChar == 'x')
                 {
                     Vector3 newPosition = new Vector3(columnIndex + 0.5f, row + 0.5f, 0);

@@ -11,12 +11,16 @@ public class CoinCountLogic : MonoBehaviour
     public static TextMeshProUGUI coinText;
     public TextMeshProUGUI coinCountText;
     
+    private static AudioController audioController;
+    
     void Start()
     {
         // Set the initial coin counter to the proper Ox00 count
         coinCount = 0;
         coinText = coinCountText.GetComponent<TextMeshProUGUI>();
         coinText.text = $" x{coinCount:00}";
+        
+        audioController = AudioController.Instance;
     }
     
     void Awake()
@@ -51,6 +55,11 @@ public class CoinCountLogic : MonoBehaviour
 
     public static void AddCoin()
     {
+        if (audioController != null)
+        {
+            audioController.PlayBumpCoinBlock(); // Play the sound for touching the coin block
+        }
+        
         coinCount++; // Add 1 coin to the coin count
         coinText.text = $" x{coinCount:00}"; // Update the coin display
         // This stays as Ox00 up until it hits Ox10 and so on

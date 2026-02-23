@@ -6,6 +6,8 @@ public class FlagpoleLogic : MonoBehaviour
     public GameObject flagTopPrefab;
     public GameObject flagPolePrefab;
 
+    private static AudioController audioController;
+    
     public static void CheckForWin(CharacterController controller, Transform playerTransform)
     {
         // Center of the Mario
@@ -28,8 +30,11 @@ public class FlagpoleLogic : MonoBehaviour
     // Callable method that handles stopping the timer and the Mario
     public static void Win()
     {
+        AudioController.Instance?.PlayMarioTouchesTheFlag(); // This will activate the coroutine
+        // Where the sound of Mariou touching the flag plays, and after its over
+        // the victory song will play.
+        
         Debug.Log("You win!");
-
         TimeController.StopTime();
         CharacterDriver.StopTheMario(false, 0);
     }
