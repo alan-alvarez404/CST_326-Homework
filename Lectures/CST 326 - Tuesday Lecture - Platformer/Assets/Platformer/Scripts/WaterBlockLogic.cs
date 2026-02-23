@@ -2,8 +2,18 @@ using UnityEngine;
 
 public class WaterBlockLogic : MonoBehaviour
 {
+    // Needed for losing
+    public float fallRate = -1f; // Rate at which he falls through (hopefully slow)
+    public static float newFallRate; // Default should be -1 by the way. Looks the best
+    
     // Prefab needed to make the player lose
     public GameObject waterBlockPrefab;
+
+    // Have to do this just so I can edit the fall rate in the inspector
+    private void Awake()
+    {
+        newFallRate = fallRate;
+    }
     
     public static void CheckForWater(CharacterController controller, Transform playerTransform)
     {
@@ -29,7 +39,12 @@ public class WaterBlockLogic : MonoBehaviour
     {
         Debug.Log("Game Over: Fell into water");
 
+        // This is needed so that Mario continues to fall through water at a slow rate
+        bool fallThrough = true;
+        
+        // Debug.Log($"newFallRate = {newFallRate}");
+        
         TimeController.StopTime();
-        CharacterDriver.StopTheMario();
+        CharacterDriver.StopTheMario(fallThrough, newFallRate); // Pass in a value related to the y velocity
     }
 }

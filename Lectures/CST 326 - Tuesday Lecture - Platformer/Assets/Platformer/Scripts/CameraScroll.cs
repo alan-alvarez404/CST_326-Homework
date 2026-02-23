@@ -40,11 +40,11 @@ public class CameraScroll : MonoBehaviour
         // So that you can tell via the console if the keys are being pressed or not
         if (Keyboard.current.leftArrowKey.wasPressedThisFrame)
         {
-            Debug.Log("Left Arrow Key Pressed. Camera Moving Left");
+            //Debug.Log("Left Arrow Key Pressed. Camera Moving Left");
         }
         if (Keyboard.current.rightArrowKey.wasPressedThisFrame)
         {
-            Debug.Log("Right Arrow Key Pressed. Camera Moving Right");
+            //Debug.Log("Right Arrow Key Pressed. Camera Moving Right");
         }        
         
         if (move == 0f)

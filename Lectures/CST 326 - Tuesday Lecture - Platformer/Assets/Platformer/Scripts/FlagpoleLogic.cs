@@ -31,6 +31,6 @@ public class FlagpoleLogic : MonoBehaviour
         Debug.Log("You win!");
 
         TimeController.StopTime();
-        CharacterDriver.StopTheMario();
+        CharacterDriver.StopTheMario(false, 0);
     }
 }

@@ -4,14 +4,21 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(CharacterController))]
 public class CharacterDriver : MonoBehaviour
 {
+    [Header("Ground Movement Values")]
     public float walkSpeed = 5f;
     public float runSpeed = 10f;
     public float groundAcceleration = 1f;
 
+    [Header("Air Movement Values")]
     public float airAcceleration = 15f; // Default SHOULD be 15f
     public float airDeceleration = 10f; // Needed for slowing the player down midair if they don't hold a movement key (default is 10f)
     public float apexHeight = 4.5f;
     public float apexTime = 0.7f; // Default SHOULD BE 0.7
+    
+    // These are needed for trying to make Mario fall at a sdet rate
+    [Header("Miscellaneous")] 
+    public static bool isForced = false;
+    public static float forcedFallSpeed = 0f;
     
     CharacterController _controller;
     
@@ -39,21 +46,44 @@ public class CharacterDriver : MonoBehaviour
     // Have to do this to be able to stop time in the next method properly
     private static CharacterDriver instance;
     
-    public static void StopTheMario()
+    public static void StopTheMario(bool stillFallling, float fallSpeed)
     {
         // Make it so mario's transform and momentum freezes
 
         instance._velocityX = 0f;
         instance._velocityY = 0f;
         
+        // If stillFalling is true set these values used in Update()
+        if (stillFallling)
+        {
+            isForced = true;
+            forcedFallSpeed = fallSpeed;
+            
+            // Disable the character controller portion of this script
+            instance._controller.enabled = false;
+            return;
+        }
+        
         // Disable the entire movement scripting inside of Update
         instance.enabled = false;
-
     }
     
     // Update is called once per frame
     void Update()
     {
+        // Is checked immediately 
+        if (isForced)
+        {
+            // Freeze the controls but make Mario fall at a set speed
+            Vector3 position = transform.position;
+            position.y += forcedFallSpeed * Time.deltaTime; 
+            
+            // Make Mario fall at the new velocity that is the forced fall speed
+            transform.position = position;
+            return;
+        }
+        
+        
         float direction = 0f;
         if (Keyboard.current.dKey.isPressed) direction += 1f;
         if (Keyboard.current.aKey.isPressed) direction -= 1f;
