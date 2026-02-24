@@ -12,8 +12,9 @@ public class AudioController : MonoBehaviour
     public AudioClip defeatMusic;
     public AudioClip victoryMusic;
 
-    [Header("Volume")] public float volume = 1f;
-    public float musicVolume = 1f;
+    [Header("Volume")] 
+    public float volume = 0.3f;
+    public float musicVolume = 0.3f;
 
     [Header("Sources")] public AudioSource audioSource;
     public AudioSource backgroundSource;

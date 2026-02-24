@@ -999,7 +999,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1102,8 +1102,8 @@ MonoBehaviour:
   backgroundMusic: {fileID: 8300000, guid: 58b2c962ca0ea064cae428c2bbe0ee8a, type: 3}
   defeatMusic: {fileID: 8300000, guid: 60cd37c8dc55b4c438fa528ec79ddf98, type: 3}
   victoryMusic: {fileID: 8300000, guid: 8ff4b745bbc768f40b2605d43c766661, type: 3}
-  volume: 1
-  musicVolume: 1
+  volume: 0.3
+  musicVolume: 0.3
   audioSource: {fileID: 997406753}
   backgroundSource: {fileID: 997406753}
 --- !u!4 &997406755

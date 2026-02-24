@@ -10,12 +10,16 @@ public class TimeController : MonoBehaviour
     
     private bool gameOver = false;
     
+    private AudioController audioController;
+    
     // Have to do this to be able to stop time in the next method properly
     private static TimeController instance;
     
     private void Awake()
     {
         instance = this;
+        
+        audioController = AudioController.Instance;
     }
     
     // Callable method to stop time
@@ -35,11 +39,21 @@ public class TimeController : MonoBehaviour
             {
                 Debug.Log("Game Over: Ran out of time");
                 gameOver = true;
+                StopTime();
+                StopMario();
+                
+                AudioController.Instance.StopBackgroundMusicLoop(); // Stop the background music for the next sound to be heard
+                AudioController.Instance.PlayLoseMusic(); // Play the sound when Mario runs out of time
             }
             return;
         }
         
         timeLeft -= Time.deltaTime * 1f; // * 3 for accurate time countdown from the original game
         timeText.text = $"TIME\n {((int)timeLeft).ToString()}";
+    }
+
+    private static void StopMario()
+    {
+        CharacterDriver.StopTheMario(false, 0);
     }
 }
