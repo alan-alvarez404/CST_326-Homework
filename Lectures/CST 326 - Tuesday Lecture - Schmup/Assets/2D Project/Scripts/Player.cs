@@ -19,6 +19,8 @@ public class Player : MonoBehaviour
             Debug.Log("Bang!");
 
             // todo - destroy the bullet after 3 seconds
+            Destroy(shot, 3f); // Overloaded to wait 3 seconds
+            
             // todo - trigger shoot animation
         }
     }
