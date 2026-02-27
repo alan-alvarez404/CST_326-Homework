@@ -2,6 +2,12 @@
 
 public class Enemy : MonoBehaviour
 {
+    
+    public AudioClip enemyTic;
+    public AudioClip enemyTac;
+    
+    
+    
     public delegate void EnemyDiedFunc(float points); // Func is delegate type
     public static event EnemyDiedFunc OnEnemyDied;
     
@@ -22,5 +28,20 @@ public class Enemy : MonoBehaviour
         }
         
         // todo - trigger death animation
+    }
+
+    public void PlayTicSound()
+    {
+        GetComponent<AudioSource>().PlayOneShot(enemyTic);
+        
+        
+        Debug.Log("Tic");
+    }
+    
+    public void PlayTacSound()
+    {
+        GetComponent<AudioSource>().PlayOneShot(enemyTac);
+
+        Debug.Log("Tac");
     }
 }
