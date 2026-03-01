@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 public class GameManager : MonoBehaviour
 {
     public GameObject scoreGUI;
+    public LevelParser levelParser;
     public float scoreGUIDuration = 3f;
     
     void Start()
@@ -47,5 +48,8 @@ public class GameManager : MonoBehaviour
 
         // Disable the score GUI
         scoreGUI.SetActive(false);
+        
+        // Proceed with placing all the enemies in their right positions
+        levelParser.LoadLevel();
     }
 }
