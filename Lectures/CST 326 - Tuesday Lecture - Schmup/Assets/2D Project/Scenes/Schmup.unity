@@ -506,6 +506,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   scoreGUI: {fileID: 1076468714}
   levelParser: {fileID: 1137871643}
+  barrierSpawner: {fileID: 1137871644}
+  playerTank: {fileID: 1231187435}
   scoreGUIDuration: 3
 --- !u!4 &106117283
 Transform:
@@ -1291,13 +1293,13 @@ GameObject:
   - component: {fileID: 1231187438}
   - component: {fileID: 1231187437}
   - component: {fileID: 1231187436}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Player Tank
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &1231187436
 SpriteRenderer:
   serializedVersion: 2
@@ -1786,7 +1788,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1857032728}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ShootingOffset
   m_TagString: Untagged
   m_Icon: {fileID: 0}

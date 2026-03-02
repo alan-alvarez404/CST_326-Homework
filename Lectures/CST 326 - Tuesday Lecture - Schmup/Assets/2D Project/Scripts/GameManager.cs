@@ -6,6 +6,8 @@ public class GameManager : MonoBehaviour
 {
     public GameObject scoreGUI;
     public LevelParser levelParser;
+    public BarrierSpawner barrierSpawner;
+    public GameObject playerTank;
     public float scoreGUIDuration = 3f;
     
     void Start()
@@ -13,6 +15,11 @@ public class GameManager : MonoBehaviour
         if (scoreGUI != null)
         {
             scoreGUI.SetActive(true);
+        }
+
+        if (playerTank != null)
+        {
+            playerTank.SetActive(false);
         }
 
         StartCoroutine(startingUI()); // Start the coroutine for the score GUI
@@ -51,5 +58,12 @@ public class GameManager : MonoBehaviour
         
         // Proceed with placing all the enemies in their right positions
         levelParser.LoadLevel();
+        
+        // Proceed with placing the destructible barriers in the right spots
+        barrierSpawner.SpawnBarriers();
+        
+        // TODO - Proceed with spawning the player
+        playerTank.SetActive(true);
+
     }
 }

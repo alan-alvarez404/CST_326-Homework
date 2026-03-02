@@ -7,6 +7,8 @@ TagManager:
   - 30 Points
   - 20 Points
   - 10 Points
+  - Enemy Bullet
+  - Player Bullet
   layers:
   - Default
   - TransparentFX
@@ -15,11 +17,11 @@ TagManager:
   - Water
   - UI
   - Bullet
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Enemy Bullet
+  - Player Bullet
+  - Enemy
+  - Player
+  - Barrier
   - 
   - 
   - 

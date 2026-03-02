@@ -2,6 +2,8 @@
 
 public class Enemy : MonoBehaviour
 {
+    public GameObject enemyBulletPrefab;
+    public Transform shootOffsetTransform;
     
     public AudioClip enemyTic;
     public AudioClip enemyTac;
@@ -29,6 +31,44 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         CheckForWall(); // Check for left or right wall every frame
+    }
+
+    void Awake()
+    {
+        // Doing this here manually so that each enemy finds the right shooting offset transform
+        // I tried doing this in the Unity inspector but I couldn't get it to work
+        if (shootOffsetTransform == null)
+        {
+            // Look for the transform called Shooting Offset
+            Transform t = transform.Find("Shooting Offset");
+            if (t != null) shootOffsetTransform = t;
+        }
+    }
+    
+    void OnEnable()
+    {
+        EnemyShmovement.OnEnemyStep += TryToShoot;
+    }
+
+    void OnDisable()
+    {
+        EnemyShmovement.OnEnemyStep -= TryToShoot;
+    }
+
+    void TryToShoot()
+    {
+        int randValue = Random.Range(1, 11); // Generate random num b
+
+        if (randValue == 1)
+        {
+            // Reweriting this so that it fires the bullet and returns a bool when its fired
+            bool fired = Bullet.ShootBullet(enemyBulletPrefab, shootOffsetTransform.position, true);
+            if (fired)
+            {
+                Debug.Log("Enemy Fired!");
+            }
+        }
+        
     }
 
     void CheckForWall()
@@ -82,7 +122,7 @@ public class Enemy : MonoBehaviour
         Debug.Log("Ouch!");
         
         // todo - destroy the bullet
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Bullet"))
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Player Bullet"))
         {
             Destroy(collision.gameObject);
             Destroy(gameObject); // this.gameObject does the same
@@ -107,13 +147,13 @@ public class Enemy : MonoBehaviour
     {
         GetComponent<AudioSource>().PlayOneShot(enemyTic);
         
-        Debug.Log("Tic");
+        // Debug.Log("Tic");
     }
     
     public void PlayTacSound()
     {
         GetComponent<AudioSource>().PlayOneShot(enemyTac);
 
-        Debug.Log("Tac");
+        // Debug.Log("Tac");
     }
 }

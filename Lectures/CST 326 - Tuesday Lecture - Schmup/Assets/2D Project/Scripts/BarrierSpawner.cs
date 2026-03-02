@@ -9,7 +9,8 @@ public class BarrierSpawner : MonoBehaviour
 
     void Start()
     {
-        SpawnBarriers();
+        // Will be called in GameManager.cs
+        // SpawnBarriers();
     }
 
     public void SpawnBarriers()

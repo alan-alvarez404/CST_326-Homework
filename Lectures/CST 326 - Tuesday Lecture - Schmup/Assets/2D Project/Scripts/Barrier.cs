@@ -36,7 +36,7 @@ public class Barrier : MonoBehaviour
     
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Bullet") && barrierHealth > 0)
+        if ((collision.gameObject.layer == LayerMask.NameToLayer("Player Bullet") || collision.gameObject.layer == LayerMask.NameToLayer("Enemy Bullet")) && barrierHealth > 0)
         {
             currentHealth -= damagePerHit; // Take 10 points of damage
             

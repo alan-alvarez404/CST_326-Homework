@@ -11,6 +11,10 @@ public class EnemyShmovement : MonoBehaviour
     private int currentStepDirection = 1; // 1 to the right, -1 to the left
     private bool okayToStepDown = false;
 
+    // Fire an event that Enemy.cs will listen for so that it can attempt to fire a bullet
+    public delegate void EnemySteppedFunc(); // Func is delegate type
+    public static event EnemySteppedFunc OnEnemyStep;
+    
     void OnEnable()
     {
         Enemy.OnEnemyTouchBorder += enemyBorderToucher;
@@ -32,13 +36,26 @@ public class EnemyShmovement : MonoBehaviour
     {
         okayToStepDown = true;
     }
+    
+    // This should return an updated step interval based on how much enemies are left
+    private float newStepInterval()
+    {
+        int alive = transform.childCount;
+        
+        if (alive <= 5)  return stepIntervalInSeconds * 0.12f;
+        if (alive <= 10) return stepIntervalInSeconds * 0.20f;
+        if (alive <= 20) return stepIntervalInSeconds * 0.36f;
+        if (alive <= 35) return stepIntervalInSeconds * 0.60f;
+        
+        return stepIntervalInSeconds * 1.00f;
+    }
 
     // Doing local position since that's how we got it to work for instantiating them
     private IEnumerator Stepping()
     {
         while (true) // Always will happen
         {
-            yield return new WaitForSeconds(stepIntervalInSeconds); // Should be a 1.0 second interval
+            yield return new WaitForSeconds(newStepInterval()); // Should be a 1.0 second interval
 
             if (okayToStepDown)
             {
@@ -59,6 +76,9 @@ public class EnemyShmovement : MonoBehaviour
             {
                 child.localPosition += Vector3.right * (xStepDistance * currentStepDirection);
             }
+
+            // Fire the event that Enemy.cs will listen for
+            OnEnemyStep?.Invoke();
         }
     }
 }

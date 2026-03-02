@@ -19,6 +19,9 @@ public class Player : MonoBehaviour
     
     private Vector3 startingPosition;
     
+    public delegate void PlayerDiedFunc(); // Func is delegate type
+    public static event PlayerDiedFunc OnPlayerDied;
+    
     // private AudioController audioController;
     
     void Start()
@@ -53,6 +56,22 @@ public class Player : MonoBehaviour
         if(_instance == this) _instance = null;
     }
     
+    
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log("Player Tank Destroyed!");
+        
+        // todo - destroy the bullet
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy Bullet"))
+        {
+            Destroy(collision.gameObject);
+            Destroy(gameObject); // this.gameObject does the same
+            OnPlayerDied?.Invoke();
+        }
+        
+        // todo - trigger death animation
+    }
+    
     // Gonna do movement similar to the Nario platformer to clamp speed
     void Update()
     {
@@ -71,16 +90,17 @@ public class Player : MonoBehaviour
         
         if (Keyboard.current != null && Keyboard.current.spaceKey.wasPressedThisFrame)
         {
-            GameObject shot = Instantiate(bulletPrefab, shootOffsetTransform.position, Quaternion.identity);
-            Debug.Log("Bang!");
-
-            // todo - destroy the bullet after 3 seconds
-            Destroy(shot, 3f); // Overloaded to wait 3 seconds
-
-            if (GetComponent<Animator>() != null)
+            // Reweriting this so that it fires the bullet and returns a bool when its fired
+            bool fired = Bullet.ShootBullet(bulletPrefab, shootOffsetTransform.position, false);
+            if (fired)
             {
-                // this is where I would trigger shoot animation but once again the player tank has no shooting sprites
-                GetComponent<Animator>().SetTrigger("Shot Trigger");
+                Debug.Log("Bang!");
+                
+                if (GetComponent<Animator>() != null)
+                {
+                    // this is where I would trigger shoot animation but once again the player tank has no shooting sprites
+                    GetComponent<Animator>().SetTrigger("Shot Trigger");
+                }
             }
         }
 
