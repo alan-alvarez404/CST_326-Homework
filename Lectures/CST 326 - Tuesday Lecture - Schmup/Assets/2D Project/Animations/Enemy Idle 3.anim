@@ -23,9 +23,9 @@ AnimationClip:
     - time: 0
       value: {fileID: 4927235947572178065, guid: 632976c798d4e7249a4c3c26f6fc0e95, type: 3}
     - time: 0.25
-      value: {fileID: 2267348298697290195, guid: db82139fff5a3a04e88363d971160e3b, type: 3}
-    - time: 0.5
       value: {fileID: 4927235947572178065, guid: 632976c798d4e7249a4c3c26f6fc0e95, type: 3}
+    - time: 0.5
+      value: {fileID: 2267348298697290195, guid: db82139fff5a3a04e88363d971160e3b, type: 3}
     - time: 0.75
       value: {fileID: 2267348298697290195, guid: db82139fff5a3a04e88363d971160e3b, type: 3}
     attribute: m_Sprite
@@ -51,8 +51,8 @@ AnimationClip:
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
     - {fileID: 4927235947572178065, guid: 632976c798d4e7249a4c3c26f6fc0e95, type: 3}
-    - {fileID: 2267348298697290195, guid: db82139fff5a3a04e88363d971160e3b, type: 3}
     - {fileID: 4927235947572178065, guid: 632976c798d4e7249a4c3c26f6fc0e95, type: 3}
+    - {fileID: 2267348298697290195, guid: db82139fff5a3a04e88363d971160e3b, type: 3}
     - {fileID: 2267348298697290195, guid: db82139fff5a3a04e88363d971160e3b, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
@@ -79,14 +79,14 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0.25
+  - time: 0.5
     functionName: PlayTicSound
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.75
+  - time: 1
     functionName: PlayTacSound
     data: 
     objectReferenceParameter: {fileID: 0}

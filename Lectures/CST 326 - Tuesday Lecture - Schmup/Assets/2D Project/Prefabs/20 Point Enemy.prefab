@@ -96,7 +96,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyTic: {fileID: 8300000, guid: 22ca76a58ea27ac4096f10a1985fe5f4, type: 3}
   enemyTac: {fileID: 8300000, guid: e5bc6d89a001e6843907f9079c861d02, type: 3}
-  enemyType: 0
+  enemyType: 2
 --- !u!95 &9170414777358380474
 Animator:
   serializedVersion: 7

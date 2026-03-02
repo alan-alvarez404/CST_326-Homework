@@ -133,6 +133,10 @@ public class LevelParser : MonoBehaviour
                     Transform enemy30PointInstance = Instantiate(enemy30Points, levelRoot).transform;
                     enemy30PointInstance.localPosition = newPosition; // Had to change to localPosition instead of just position
                     enemy30PointInstance.tag = "30 Points"; // Tag this enemy with the 30 points tag
+                    
+                    // Needed to set the right value for animation
+                    var enemy = enemy30PointInstance.GetComponent<Enemy>();
+                    enemy.SetType(3);
                 }
                 
                 if (currentChar == '2')
@@ -140,6 +144,10 @@ public class LevelParser : MonoBehaviour
                     Transform enemy20PointInstance = Instantiate(enemy20Points, levelRoot).transform;
                     enemy20PointInstance.localPosition = newPosition;
                     enemy20PointInstance.tag = "20 Points"; // Tag this enemy with the 20 points tag
+                    
+                    // Needed to set the right value for animation
+                    var enemy = enemy20PointInstance.GetComponent<Enemy>();
+                    enemy.SetType(2);
                 }
                 
                 if (currentChar == '1')
@@ -147,6 +155,10 @@ public class LevelParser : MonoBehaviour
                     Transform enemy10PointInstance = Instantiate(enemy10Points, levelRoot).transform;
                     enemy10PointInstance.localPosition = newPosition;
                     enemy10PointInstance.tag = "10 Points"; // Tag this enemy with the 10 points tag
+                    
+                    // Needed to set the right value for animation
+                    var enemy = enemy10PointInstance.GetComponent<Enemy>();
+                    enemy.SetType(1);
                 }
 
                 // Will keep these commented for now
