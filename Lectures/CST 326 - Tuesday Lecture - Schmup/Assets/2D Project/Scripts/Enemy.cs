@@ -8,17 +8,66 @@ public class Enemy : MonoBehaviour
 
     public int enemyType;
 
+    public static float wallStepDetectionDistance = 0.25f; // Shared within the enemy movement script
     
     public delegate void EnemyDiedFunc(float points); // Func is delegate type
     public static event EnemyDiedFunc OnEnemyDied;
     
+    // Making a new delegate and event for when an enemy reaches the rightmost or leftmost sides of the game
+    public delegate void EnemyTouchedWallFunc(int whichWall);
+    public static event EnemyTouchedWallFunc OnEnemyTouchBorder;
+    
+    private bool hitWall = false;
+    
+    // Making a new delegate and event for when an enemy reaches the area where the player borders spawn
+    public delegate void EnemyCrossedBorderFunc(bool crossed);
+    public static event EnemyCrossedBorderFunc OnEnemyCrossBorder;
+    
     // Static variables are associated with the object
-    // It's associated with a class definition and not an instance
+    // It's associated with a class definition and not an instance (these are notes btw)
 
-    void Awake()
+    void Update()
     {
-
+        CheckForWall(); // Check for left or right wall every frame
     }
+
+    void CheckForWall()
+    {
+        // Getting the camera for calculations
+        Camera main = Camera.main;
+        float distanceForZ = -main.transform.position.z; // Currently the camera's z in the inspector is -1, make it positive for future calculations
+        
+        // Left and Right Edges
+        float leftEdge = main.ViewportToWorldPoint(new Vector3(0f, 0f, distanceForZ)).x;
+        float rightEdge = main.ViewportToWorldPoint(new Vector3(1f, 0f, distanceForZ)).x;
+        
+        // Get the half the width of the sprites so that they don't cross the edges partially before switching directions
+        float halfWidth = GetComponent<SpriteRenderer>().bounds.extents.x + wallStepDetectionDistance;
+        
+        float xPos = transform.position.x;
+        
+        // If at the edge start an event
+        if (xPos + halfWidth >= rightEdge)
+        {
+            if (!hitWall)
+            {
+                hitWall = true;
+                OnEnemyTouchBorder?.Invoke(1); // 1 is for the right wall
+            }
+        } else if (xPos - halfWidth <= leftEdge)
+        {
+            if (!hitWall)
+            {
+                hitWall = true;
+                OnEnemyTouchBorder?.Invoke(-1); // -1 is for the left wall
+            }
+        }
+        else
+        {
+            hitWall = false;
+        }
+    }
+    
     
     // Going to be called from LevelParser.cs when the enemy gets instantiated
     public void SetType(int type)
@@ -26,8 +75,6 @@ public class Enemy : MonoBehaviour
         enemyType = type;
         // Set the value in the animator so that the enemy iterates througth the right sprites
         GetComponent<Animator>().SetInteger("Enemy Type", enemyType);    
-        // Just checking
-        Debug.Log($"[{name}] SetType -> {enemyType} | Animator param now = {GetComponent<Animator>().GetInteger("Enemy Type")}");
     }
     
     void OnCollisionEnter2D(Collision2D collision)
@@ -40,10 +87,10 @@ public class Enemy : MonoBehaviour
             Destroy(collision.gameObject);
             Destroy(gameObject); // this.gameObject does the same
 
-            if (gameObject.tag == "30 Points")
+            if (gameObject.CompareTag("30 Points"))
             {
                 OnEnemyDied?.Invoke(30); // 30 Point Enemy
-            } else if (gameObject.tag == "20 Points")
+            } else if (gameObject.CompareTag("20 Points"))
             {
                 OnEnemyDied?.Invoke(20); // 20 Point Enemy
             }
