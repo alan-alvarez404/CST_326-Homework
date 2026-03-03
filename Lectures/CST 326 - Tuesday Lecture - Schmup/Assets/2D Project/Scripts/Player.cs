@@ -19,6 +19,12 @@ public class Player : MonoBehaviour
     
     private Vector3 startingPosition;
     
+    [Header("Animation Parameters")] 
+    public float deathDelay = 0.25f;
+    private bool isDying = false;
+    private Animator animator;
+    private Collider2D collidr;
+    
     public delegate void PlayerDiedFunc(); // Func is delegate type
     public static event PlayerDiedFunc OnPlayerDied;
     
@@ -34,6 +40,8 @@ public class Player : MonoBehaviour
         controller = GetComponent<CharacterController>();
 
         // audioController = audioController.Instance;
+        animator = GetComponent<Animator>();
+        collidr = GetComponent<Collider2D>();
     }
 
     // Needed for the next function
@@ -62,14 +70,18 @@ public class Player : MonoBehaviour
         Debug.Log("Player Tank Destroyed!");
         
         // todo - destroy the bullet
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy Bullet"))
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy Bullet") && !isDying)
         {
+            isDying = true;
             Destroy(collision.gameObject);
-            Destroy(gameObject); // this.gameObject does the same
+            
+            collidr.enabled = false;
+            enabled = false;
+            animator.SetTrigger("Player Died");
+            
             OnPlayerDied?.Invoke();
+            Destroy(gameObject, deathDelay); // Destroy the enemy after a set delay
         }
-        
-        // todo - trigger death animation
     }
     
     // Gonna do movement similar to the Nario platformer to clamp speed

@@ -107,7 +107,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 0.26, y: 0.18}
-    newSize: {x: 2.56, y: 2.56}
+    newSize: {x: 0.26, y: 0.18}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -131,6 +131,7 @@ MonoBehaviour:
   enemyTic: {fileID: 8300000, guid: 22ca76a58ea27ac4096f10a1985fe5f4, type: 3}
   enemyTac: {fileID: 8300000, guid: e5bc6d89a001e6843907f9079c861d02, type: 3}
   enemyType: 1
+  deathDelay: 0.25
 --- !u!95 &5813730334412408898
 Animator:
   serializedVersion: 7
@@ -207,7 +208,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2.56, y: 2.56}
+  m_Size: {x: 0.26, y: 0.18}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

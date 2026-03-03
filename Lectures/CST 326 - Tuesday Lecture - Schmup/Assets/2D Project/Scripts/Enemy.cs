@@ -10,6 +10,12 @@ public class Enemy : MonoBehaviour
 
     public int enemyType;
 
+    [Header("Animation Parameters")] 
+    public float deathDelay = 0.25f;
+    private bool isDying = false;
+    private Animator animator;
+    private Collider2D collider;
+
     public static float wallStepDetectionDistance = 0.25f; // Shared within the enemy movement script
     
     public delegate void EnemyDiedFunc(float points); // Func is delegate type
@@ -35,6 +41,11 @@ public class Enemy : MonoBehaviour
 
     void Awake()
     {
+        var spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        
+        animator = (spriteRenderer != null) ? spriteRenderer.GetComponent<Animator>() : null;
+        collider = GetComponent<Collider2D>();
+        
         // Doing this here manually so that each enemy finds the right shooting offset transform
         // I tried doing this in the Unity inspector but I couldn't get it to work
         if (shootOffsetTransform == null)
@@ -57,6 +68,8 @@ public class Enemy : MonoBehaviour
 
     void TryToShoot()
     {
+        if (isDying) return;
+        
         int randValue = Random.Range(1, 11); // Generate random num b
 
         if (randValue == 1)
@@ -114,7 +127,10 @@ public class Enemy : MonoBehaviour
     {
         enemyType = type;
         // Set the value in the animator so that the enemy iterates througth the right sprites
-        GetComponent<Animator>().SetInteger("Enemy Type", enemyType);    
+        if (animator != null)
+        {
+            animator.SetInteger("Enemy Type", enemyType);    
+        }
     }
     
     void OnCollisionEnter2D(Collision2D collision)
@@ -122,10 +138,11 @@ public class Enemy : MonoBehaviour
         Debug.Log("Ouch!");
         
         // todo - destroy the bullet
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Player Bullet"))
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Player Bullet") && !isDying)
         {
+            isDying = true;
+            
             Destroy(collision.gameObject);
-            Destroy(gameObject); // this.gameObject does the same
 
             if (gameObject.CompareTag("30 Points"))
             {
@@ -138,9 +155,25 @@ public class Enemy : MonoBehaviour
             {
                 OnEnemyDied?.Invoke(10); // Question Mark = if null, don't
             }
+            
+            // Stop the enemy's collisions and shooting logic
+            collider.enabled = false;
+            EnemyShmovement.OnEnemyStep -= TryToShoot;
+            
+            // Make it so that it can no longer be moved by EnemyShmovement.cs
+            transform.SetParent(null, true);
+            
+            // Trigger death animation
+            if (animator != null)
+            {
+                animator.SetBool("Is Dead", true); // Setting this to true should ensure that the idle states
+                // no longer try to happen which may or may not have been overwriting the death animation
+                // Yep that solves it
+                animator.SetTrigger("Enemy Died");
+            }
+            
+            Destroy(gameObject, deathDelay); // Destroy the enemy after a set delay
         }
-        
-        // todo - trigger death animation
     }
 
     public void PlayTicSound()

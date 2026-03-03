@@ -1292,6 +1292,7 @@ GameObject:
   - component: {fileID: 1231187439}
   - component: {fileID: 1231187438}
   - component: {fileID: 1231187437}
+  - component: {fileID: 1231187440}
   - component: {fileID: 1231187436}
   m_Layer: 10
   m_Name: Player Tank
@@ -1354,10 +1355,10 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2.56, y: 2.56}
+  m_Size: {x: 0.32, y: 0.18}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_SpriteSortPoint: 0
 --- !u!114 &1231187437
 MonoBehaviour:
@@ -1376,6 +1377,7 @@ MonoBehaviour:
   moveSpeed: 10
   moveAcceleration: 5
   decelerationMultiplier: 8
+  deathDelay: 0.25
 --- !u!61 &1231187438
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1414,8 +1416,8 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.28, y: 0.18}
-    newSize: {x: 2.56, y: 2.56}
+    oldSize: {x: 0.32, y: 0.18}
+    newSize: {x: 0.32, y: 0.18}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -1438,6 +1440,28 @@ Transform:
   - {fileID: 1857032728}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1231187440
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1231187435}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3daab11cb61e010419f2f1c1c7511934, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1405508895
 GameObject:
   m_ObjectHideFlags: 0
@@ -2028,6 +2052,7 @@ MonoBehaviour:
   moveSpeed: 5
   moveAcceleration: 1
   decelerationMultiplier: 8
+  deathDelay: 0.25
 --- !u!4 &3921969463098233975
 Transform:
   m_ObjectHideFlags: 0
