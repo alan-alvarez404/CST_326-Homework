@@ -8,8 +8,8 @@ public class UFO : MonoBehaviour
     // The score the UFO can give is chosen at random from this array
     public int[] numbers = { 100, 50, 50, 100, 150, 100, 100, 50, 300, 100, 100, 100, 50, 150, 100, 50 };
     
-    public delegate void UFODiedFUnc(int randomPoints); // Func is delegate type
-    public static event UFODiedFUnc OnUFOHit;
+    public delegate void UFODiedFunc(int randomPoints); // Func is delegate type
+    public static event UFODiedFunc OnUFOHit;
 
     private float speed = 5f;
     
@@ -129,7 +129,7 @@ public class UFO : MonoBehaviour
             {
                 OnUFOHit?.Invoke(mystery); // Mystery points
                 
-                //GameManager.AddPoints(mystery); // Update the GUI
+                // GameManager.AddPoints(mystery); // Update the GUI
             }
 
             // Stop the enemy's collisions and shooting logic

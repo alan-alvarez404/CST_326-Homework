@@ -152,17 +152,26 @@ public class Enemy : MonoBehaviour
                 GetComponent<AudioSource>().PlayOneShot(enemyDie);
                 
                 OnEnemyDied?.Invoke(30); // 30 Point Enemy
+                
+                // GameManager.AddPoints(30); // Update the GUI
+
             } else if (gameObject.CompareTag("20 Points"))
             {
                 GetComponent<AudioSource>().PlayOneShot(enemyDie);
                 
                 OnEnemyDied?.Invoke(20); // 20 Point Enemy
+                
+                // GameManager.AddPoints(20); // Update the GUI
+
             }
             else // 10 Point Enemy
             {
                 GetComponent<AudioSource>().PlayOneShot(enemyDie);
 
                 OnEnemyDied?.Invoke(10); // Question Mark = if null, don't
+                
+                // GameManager.AddPoints(10); // Update the GUI
+
             }
             
             // Stop the enemy's collisions and shooting logic

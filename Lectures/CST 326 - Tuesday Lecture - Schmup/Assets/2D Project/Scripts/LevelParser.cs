@@ -161,30 +161,6 @@ public class LevelParser : MonoBehaviour
                     enemy.SetType(1);
                 }
 
-                // Will keep these commented for now
-                
-                /*
-                
-                // This is for the player
-                if (currentChar == 'p')
-                {
-                    Vector3 newPosition = new Vector3(columnIndex + 0.5f, row + 0.5f, 0);
-                    Transform playerTankInstance = Instantiate(playerTank, levelRoot).transform;
-                    playerTankInstance.position = newPosition;
-                    playerTankInstance.tag = "Player Tank"; // Tag the bricks with a Water tag
-                }
-                
-                // This for the destructible barriers
-                if (currentChar == 'b')
-                {
-                    Vector3 newPosition = new Vector3(columnIndex + 0.5f, row + 0.5f, 0);
-                    Transform playerBarrierInstance = Instantiate(playerBarrier, levelRoot).transform;
-                    playerBarrierInstance.position = newPosition;
-                    playerBarrierInstance.tag = "Player Barrier"; // Tag the bricks with a barrier tag
-                }
-                
-                */
-
             }  
 
             row++;
