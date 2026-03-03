@@ -19,6 +19,10 @@ public class Barrier : MonoBehaviour
     public float sizeDecreasePerHit = 0.25f;
     public float lowHealthSize = 0.25f;
     
+    [Header("Audio")]
+    public AudioClip barrierTakeDamage;
+    public AudioClip barrierShatter;
+    
     private SpriteRenderer spriteRenderer;
     
     // Making a new delegate and event for when a barrier is broken
@@ -45,8 +49,12 @@ public class Barrier : MonoBehaviour
             UpdateHealthColor(); // Update the color relative to current health
             UpdateHealthSize(); // Update the size relative to current health
             
+            GetComponent<AudioSource>().PlayOneShot(barrierTakeDamage);
+            
             if (currentHealth <= 0)
             {
+                GetComponent<AudioSource>().PlayOneShot(barrierShatter);
+                
                 BarrierWasShattered?.Invoke(whichBarrier);
                 Debug.Log($"Barrier number {whichBarrier} was shattered");
                 Destroy(gameObject);

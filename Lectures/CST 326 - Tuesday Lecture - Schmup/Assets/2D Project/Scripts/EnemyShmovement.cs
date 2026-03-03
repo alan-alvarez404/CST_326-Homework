@@ -15,6 +15,10 @@ public class EnemyShmovement : MonoBehaviour
     public delegate void EnemySteppedFunc(); // Func is delegate type
     public static event EnemySteppedFunc OnEnemyStep;
     
+    // Fire an event that UFO.cs will listen for so that it can appear
+    public delegate void EnemySteppedDownFunc(); // Func is delegate type
+    public static event EnemySteppedDownFunc OnEnemiesSteppedDown;
+    
     void OnEnable()
     {
         Enemy.OnEnemyTouchBorder += enemyBorderToucher;
@@ -69,6 +73,8 @@ public class EnemyShmovement : MonoBehaviour
                 }
                 
                 Debug.Log("Enemies touched wall. Now stepping down");
+
+                OnEnemiesSteppedDown?.Invoke(); // The UFO will listen for this
             }
             
             // Move the group of enemies left or right

@@ -128,8 +128,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyBulletPrefab: {fileID: 2457785739244962049, guid: fb06d46e3c3c2474d9d3b4dd3dcac3c1, type: 3}
   shootOffsetTransform: {fileID: 0}
-  enemyTic: {fileID: 8300000, guid: 22ca76a58ea27ac4096f10a1985fe5f4, type: 3}
-  enemyTac: {fileID: 8300000, guid: e5bc6d89a001e6843907f9079c861d02, type: 3}
+  enemyFire: {fileID: 8300000, guid: b255d3fd927bd3c4488293c018e910ce, type: 3}
+  enemyDie: {fileID: 8300000, guid: 28c1f3314626429418e53082671a0657, type: 3}
   enemyType: 2
   deathDelay: 0.25
 --- !u!95 &9170414777358380474
@@ -220,7 +220,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5569391197182786493}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}

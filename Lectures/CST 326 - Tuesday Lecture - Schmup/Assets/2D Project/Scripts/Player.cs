@@ -4,6 +4,10 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
+    [Header("Audio")]
+    public AudioClip playerFire;
+    public AudioClip playerDie;
+    
     public GameObject bulletPrefab;
     public Transform shootOffsetTransform;
     
@@ -61,7 +65,7 @@ public class Player : MonoBehaviour
 
     void OnDestroy()
     {
-        if(_instance == this) _instance = null;
+        if (_instance == this) _instance = null;
     }
     
     
@@ -78,6 +82,8 @@ public class Player : MonoBehaviour
             collidr.enabled = false;
             enabled = false;
             animator.SetTrigger("Player Died");
+            
+            GetComponent<AudioSource>().PlayOneShot(playerDie);
             
             OnPlayerDied?.Invoke();
             Destroy(gameObject, deathDelay); // Destroy the enemy after a set delay
@@ -106,12 +112,14 @@ public class Player : MonoBehaviour
             bool fired = Bullet.ShootBullet(bulletPrefab, shootOffsetTransform.position, false);
             if (fired)
             {
+                GetComponent<AudioSource>().PlayOneShot(playerFire);
+                
                 Debug.Log("Bang!");
                 
                 if (GetComponent<Animator>() != null)
                 {
                     // this is where I would trigger shoot animation but once again the player tank has no shooting sprites
-                    GetComponent<Animator>().SetTrigger("Shot Trigger");
+                    animator.SetTrigger("Shot Trigger");
                 }
             }
         }

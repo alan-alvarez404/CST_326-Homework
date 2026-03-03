@@ -5,8 +5,9 @@ public class Enemy : MonoBehaviour
     public GameObject enemyBulletPrefab;
     public Transform shootOffsetTransform;
     
-    public AudioClip enemyTic;
-    public AudioClip enemyTac;
+    [Header("Audio")]
+    public AudioClip enemyFire;
+    public AudioClip enemyDie;
 
     public int enemyType;
 
@@ -78,6 +79,8 @@ public class Enemy : MonoBehaviour
             bool fired = Bullet.ShootBullet(enemyBulletPrefab, shootOffsetTransform.position, true);
             if (fired)
             {
+                GetComponent<AudioSource>().PlayOneShot(enemyFire);
+                
                 Debug.Log("Enemy Fired!");
             }
         }
@@ -146,13 +149,19 @@ public class Enemy : MonoBehaviour
 
             if (gameObject.CompareTag("30 Points"))
             {
+                GetComponent<AudioSource>().PlayOneShot(enemyDie);
+                
                 OnEnemyDied?.Invoke(30); // 30 Point Enemy
             } else if (gameObject.CompareTag("20 Points"))
             {
+                GetComponent<AudioSource>().PlayOneShot(enemyDie);
+                
                 OnEnemyDied?.Invoke(20); // 20 Point Enemy
             }
             else // 10 Point Enemy
             {
+                GetComponent<AudioSource>().PlayOneShot(enemyDie);
+
                 OnEnemyDied?.Invoke(10); // Question Mark = if null, don't
             }
             
@@ -174,19 +183,5 @@ public class Enemy : MonoBehaviour
             
             Destroy(gameObject, deathDelay); // Destroy the enemy after a set delay
         }
-    }
-
-    public void PlayTicSound()
-    {
-        GetComponent<AudioSource>().PlayOneShot(enemyTic);
-        
-        // Debug.Log("Tic");
-    }
-    
-    public void PlayTacSound()
-    {
-        GetComponent<AudioSource>().PlayOneShot(enemyTac);
-
-        // Debug.Log("Tac");
     }
 }

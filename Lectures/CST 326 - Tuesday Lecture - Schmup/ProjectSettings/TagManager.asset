@@ -9,6 +9,7 @@ TagManager:
   - 10 Points
   - Enemy Bullet
   - Player Bullet
+  - UFO
   layers:
   - Default
   - TransparentFX
