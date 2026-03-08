@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: e7fbd2f42d2f5684599eae808255141e
+guid: 412803da626749c4c9ac8c11d0d77fe6
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3232346348242849009
-    second: player_tank_0
+      213: -2519788307855142043
+    second: player_tank_2_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,7 +100,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: player_tank_0
+      name: player_tank_2_0
       rect:
         serializedVersion: 2
         x: 0
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1fccb06c0e99bdc20800000000000000
-      internalID: 3232346348242849009
+      spriteID: 5639c1962e9e70dd0800000000000000
+      internalID: -2519788307855142043
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      player_tank_0: 3232346348242849009
+      player_tank_2_0: -2519788307855142043
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

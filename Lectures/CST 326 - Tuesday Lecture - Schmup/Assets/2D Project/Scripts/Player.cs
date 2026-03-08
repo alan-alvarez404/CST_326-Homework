@@ -119,7 +119,7 @@ public class Player : MonoBehaviour
                 
                 if (GetComponent<Animator>() != null)
                 {
-                    // this is where I would trigger shoot animation but once again the player tank has no shooting sprites
+                    // The shooting animation does occur cuz of this trigger but its only 3 frames and its so quick
                     animator.SetTrigger("Shot Trigger");
                 }
             }

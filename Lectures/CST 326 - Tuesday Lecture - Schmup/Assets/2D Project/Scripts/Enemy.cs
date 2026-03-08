@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
@@ -27,6 +28,11 @@ public class Enemy : MonoBehaviour
     public static event EnemyTouchedWallFunc OnEnemyTouchBorder;
     
     private bool hitWall = false;
+    
+    [Header ("Shooting Parameters")]
+    public float shootDuration = 0.75f; // 0.75 is a good duration for the length that the shooting animation takes (even though it's only 4 frames)
+    public float fireBulletDelay = 0.75f; // How much time the enemy should wait before firing (in the middle of the shooting animation) (0.75 should also be good here)
+    private Coroutine shootingCoroutine;
     
     // Static variables are associated with the object
     // It's associated with a class definition and not an instance (these are notes btw)
@@ -67,22 +73,47 @@ public class Enemy : MonoBehaviour
     {
         if (isDying) return;
         
+        // Prevent trying to shoot again while in the middle of a shooting animation
+        if (shootingCoroutine != null) return;
+        
         int randValue = Random.Range(1, 11); // Generate random num b
 
         if (randValue == 1)
         {
-            // Reweriting this so that it fires the bullet and returns a bool when its fired
-            bool fired = Bullet.ShootBullet(enemyBulletPrefab, shootOffsetTransform.position, true);
-            if (fired)
+            if (animator != null)
             {
-                GetComponent<AudioSource>().PlayOneShot(enemyFire);
-                
-                Debug.Log("Enemy Fired!");
+                animator.SetBool("Is Shooting", true);
+                // The shooting animation for each enemy should occur cuz of this trigger
+                animator.SetTrigger("Enemy Shot Trigger");
+
+                // Call the coroutine that will handle shooting at a certain point in the shooting animation
+                shootingCoroutine = StartCoroutine(ShootSequence());
             }
         }
-        
     }
+    
+    private IEnumerator ShootSequence()
+    {
+        // Wait the delay for shooting in the middle of the animation
+        yield return new WaitForSeconds(fireBulletDelay);
 
+        // Reweriting this so that it fires the bullet and returns a bool when its fired
+        bool fired = Bullet.ShootBullet(enemyBulletPrefab, shootOffsetTransform.position, true);
+        if (fired)
+        {
+            GetComponent<AudioSource>().PlayOneShot(enemyFire);
+            Debug.Log("Enemy Fired!");
+        }
+
+        // Wait the rest of the enemy shooting animation by subtracting from the fireBulletDelay
+        float remaining = Mathf.Max(0f, shootDuration - fireBulletDelay);
+        yield return new WaitForSeconds(remaining);
+
+        // Setting this back to false should allow the enemy to back to its idle animation
+        animator.SetBool("Is Shooting", false);
+        shootingCoroutine = null;
+    }
+    
     void CheckForWall()
     {
         // Getting the camera for calculations
