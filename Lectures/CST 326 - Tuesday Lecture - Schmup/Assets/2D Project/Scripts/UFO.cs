@@ -14,7 +14,7 @@ public class UFO : MonoBehaviour
     private float speed = 5f;
     
     private SpriteRenderer spriteRenderer;
-    private Collider2D collider;
+    private new Collider2D collider;
     private bool isActive = false;
     private Coroutine UFOCoroutine;
 

@@ -28,10 +28,6 @@ public class Enemy : MonoBehaviour
     
     private bool hitWall = false;
     
-    // Making a new delegate and event for when an enemy reaches the area where the player borders spawn
-    public delegate void EnemyCrossedBorderFunc(bool crossed);
-    public static event EnemyCrossedBorderFunc OnEnemyCrossBorder;
-    
     // Static variables are associated with the object
     // It's associated with a class definition and not an instance (these are notes btw)
 
