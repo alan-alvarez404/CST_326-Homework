@@ -98,9 +98,11 @@ MonoBehaviour:
   enemyBulletPrefab: {fileID: 2457785739244962049, guid: fb06d46e3c3c2474d9d3b4dd3dcac3c1, type: 3}
   shootOffsetTransform: {fileID: 0}
   enemyFire: {fileID: 8300000, guid: b255d3fd927bd3c4488293c018e910ce, type: 3}
-  enemyDie: {fileID: 8300000, guid: 28c1f3314626429418e53082671a0657, type: 3}
+  enemyDie: {fileID: 8300000, guid: 17661ed4da9d66b4c9cf29b967480476, type: 3}
   enemyType: 3
   deathDelay: 0.25
+  shootDuration: 0.75
+  fireBulletDelay: 0.75
 --- !u!95 &5153098745738524726
 Animator:
   serializedVersion: 7

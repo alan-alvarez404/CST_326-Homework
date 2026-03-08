@@ -1573,7 +1573,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.28, y: 0.18}
+  m_Size: {x: 0.32, y: 0.18}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -1591,7 +1591,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerFire: {fileID: 8300000, guid: 28c1f3314626429418e53082671a0657, type: 3}
-  playerDie: {fileID: 8300000, guid: 122be71d9927b8d4d90f28bd883196e9, type: 3}
+  playerDie: {fileID: 8300000, guid: 6cda40af29da11046b84db27e4af48fb, type: 3}
   bulletPrefab: {fileID: 2457785739244962049, guid: d4511b14daaa37c468a74ed386b2583f, type: 3}
   shootOffsetTransform: {fileID: 1857032728}
   moveSpeed: 10
@@ -1636,8 +1636,8 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.28, y: 0.17}
-    newSize: {x: 0.28, y: 0.17}
+    oldSize: {x: 0.28, y: 0.18}
+    newSize: {x: 0.32, y: 0.18}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -2578,6 +2578,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: 30 Point Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 6361471794091113275, guid: 58dadffb5bc88114e87b3535088f8024, type: 3}
+      propertyPath: enemyDie
+      value: 
+      objectReference: {fileID: 8300000, guid: 17661ed4da9d66b4c9cf29b967480476, type: 3}
     - target: {fileID: 8624806714059000970, guid: 58dadffb5bc88114e87b3535088f8024, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2683,6 +2687,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 61090871}
     m_Modifications:
+    - target: {fileID: 3924037494066510271, guid: c2a56c06ab1e16649823c2e5d43e5a14, type: 3}
+      propertyPath: enemyDie
+      value: 
+      objectReference: {fileID: 8300000, guid: 17661ed4da9d66b4c9cf29b967480476, type: 3}
     - target: {fileID: 4672032142001259562, guid: c2a56c06ab1e16649823c2e5d43e5a14, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.107
@@ -2780,6 +2788,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5898353433256100691, guid: da79d0bef89ff774b858f837c9670a16, type: 3}
+      propertyPath: enemyDie
+      value: 
+      objectReference: {fileID: 8300000, guid: 17661ed4da9d66b4c9cf29b967480476, type: 3}
     - target: {fileID: 8466697746038577523, guid: da79d0bef89ff774b858f837c9670a16, type: 3}
       propertyPath: m_Name
       value: 10 Point Enemy
