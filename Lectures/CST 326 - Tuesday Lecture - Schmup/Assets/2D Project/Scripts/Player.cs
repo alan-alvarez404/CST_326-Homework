@@ -85,8 +85,9 @@ public class Player : MonoBehaviour
             
             GetComponent<AudioSource>().PlayOneShot(playerDie);
             
+            Destroy(gameObject, deathDelay); // Destroy the player after a set delay
+            
             OnPlayerDied?.Invoke();
-            Destroy(gameObject, deathDelay); // Destroy the enemy after a set delay
         }
     }
     

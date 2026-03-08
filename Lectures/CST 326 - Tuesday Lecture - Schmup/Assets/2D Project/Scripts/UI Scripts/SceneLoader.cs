@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class SceneLoader : MonoBehaviour
 {
@@ -22,16 +23,34 @@ public class SceneLoader : MonoBehaviour
     void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
+        Player.OnPlayerDied += OnPlayerDeath; // Suscribe to player death event
+        EnemyShmovement.OnEnemiesDestroyed += OnEnemiesCleared; // Suscribe to enemies cleared event
     }
 
     void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
+        Player.OnPlayerDied -= OnPlayerDeath; // Unsuscribe from player death event
+        EnemyShmovement.OnEnemiesDestroyed -= OnEnemiesCleared; // Unsuscribe from enemies cleared event
     }
     
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         SetEnemyTypes();
+        RewireStartButton(); // Have to do this so that the start button works again
+    }
+
+    private void RewireStartButton()
+    {
+        // Find the button by name
+        var startButton = GameObject.Find("Start Button");
+        if (startButton == null) return;
+        
+        var button = startButton.GetComponent<Button>();
+        if (button == null) return;
+        
+        button.onClick.RemoveAllListeners();
+        button.onClick.AddListener(LoadGame);
     }
     
     void Start()
@@ -71,5 +90,53 @@ public class SceneLoader : MonoBehaviour
         
             Debug.Log("Loaded Game");
         }
+    }
+
+    // Will handle loading the game to the credits scene upon the player getting their tank destroyed
+    public void OnPlayerDeath()
+    {
+        StartCoroutine(_LoadCreditsCoroutine(false));
+    }
+    
+    // Will handle loading the credits after receiving the event that all of the enemies have been cleared
+    public void OnEnemiesCleared()
+    {
+        StartCoroutine(_LoadCreditsCoroutine(true));
+    }
+
+    public void LoadMainMenu(int delay)
+    {
+        StartCoroutine(LoadMainMenuCoroutine(delay));
+    }
+
+    private IEnumerator _LoadCreditsCoroutine(bool won)
+    {
+        AsyncOperation loadOperation = SceneManager.LoadSceneAsync("2D Project/Scenes/Credits");
+        while (!loadOperation!.isDone) yield return null; // Exclamation mark after loadOperation makes the null reference exception shut up lmao
+
+        // Wait until scene is locked and loaded
+        
+        Debug.Log("Loaded Credits");
+        
+        // If the player won or not
+        if (won)
+        {
+            Debug.Log("You Won!");
+        }
+        else
+        {
+            Debug.Log("You Lost");
+        }
+
+        // Run after the credits are shown for 5 seconds
+        LoadMainMenu(5);
+    }
+    
+    private IEnumerator LoadMainMenuCoroutine(int delay)
+    {
+        yield return new WaitForSeconds(delay); // Wwait the 5 seconds that the credits lasts
+        SceneManager.LoadSceneAsync("2D Project/Scenes/Main Menu");
+        
+        Debug.Log("Loaded Main Menu");
     }
 }

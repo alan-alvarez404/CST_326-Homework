@@ -14,6 +14,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/2D Project/Scenes/Schmup.unity
     guid: b10c833d892f8724fac69a0625a5f543
+  - enabled: 1
+    path: Assets/2D Project/Scenes/Credits.unity
+    guid: 8f7c91ae7bdedba40b295fe9fe72b4fa
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

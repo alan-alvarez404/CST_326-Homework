@@ -31,12 +31,14 @@ public class GameManager : MonoBehaviour
     {
         if (loadingGUI != null)
         {
-            loadingGUI.SetActive(true);
+            // Hard coded to false
+            loadingGUI.SetActive(false);
         }
 
         if (inGameGUI != null)
         {
-            inGameGUI.SetActive(false);
+            // Hard coded to true
+            inGameGUI.SetActive(true);
         }
 
         if (playerTank != null)
@@ -110,10 +112,12 @@ public class GameManager : MonoBehaviour
     // This handles the score GUI being displayed for 3 seconds as long as there's no lmb click
     IEnumerator startingUI()
     {
-        float timer = 0f; // Use this to count up
+        // Hard coded this value to 3 so that the game skips the previously made menu and go straight into the game
+        float timer = 3f; // Use this to count up
         
         while (timer < scoreGUIDuration)
         {
+            
             if (Mouse.current.leftButton.wasPressedThisFrame)
             {
                 break; // Stop checking and go to disabling the GUI
@@ -136,6 +140,5 @@ public class GameManager : MonoBehaviour
         
         // Proceed with spawning the player
         playerTank.SetActive(true);
-
     }
 }

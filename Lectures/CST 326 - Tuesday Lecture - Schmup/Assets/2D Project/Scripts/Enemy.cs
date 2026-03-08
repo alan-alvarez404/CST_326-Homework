@@ -15,7 +15,7 @@ public class Enemy : MonoBehaviour
     public float deathDelay = 0.25f;
     private bool isDying = false;
     private Animator animator;
-    private Collider2D collider;
+    private new Collider2D collider;
 
     public static float wallStepDetectionDistance = 0.25f; // Shared within the enemy movement script
     

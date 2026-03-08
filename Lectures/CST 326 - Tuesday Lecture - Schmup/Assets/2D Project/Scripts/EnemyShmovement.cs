@@ -19,18 +19,26 @@ public class EnemyShmovement : MonoBehaviour
     public delegate void EnemySteppedDownFunc(); // Func is delegate type
     public static event EnemySteppedDownFunc OnEnemiesSteppedDown;
     
+    // Fire an event that SceneLoader.cs will listen for when all the enemies have been defeated
+    public delegate void EnemiesDestroyedFunc(); // Func is delegate type
+    public static event EnemiesDestroyedFunc OnEnemiesDestroyed;
+    private bool enemiesDestroyed = false; // Needed for the above event
+    
     void OnEnable()
     {
         Enemy.OnEnemyTouchBorder += enemyBorderToucher;
+        Enemy.OnEnemyDied += OnAnyEnemyDied;
     }
 
     void OnDisable()
     {
         Enemy.OnEnemyTouchBorder -= enemyBorderToucher;
+        Enemy.OnEnemyDied -= OnAnyEnemyDied;
     }
 
     void Start()
     {
+        enemiesDestroyed = false; // Reset everytime the game starts
         // Makes it so the step distance here affects the step detection in Enemy.cs
         Enemy.wallStepDetectionDistance = xStepDistance; // Just in case : )
         StartCoroutine(Stepping()); // Using a coroutine for handling enemy steps
@@ -52,6 +60,35 @@ public class EnemyShmovement : MonoBehaviour
         if (alive <= 35) return stepIntervalInSeconds * 0.60f;
         
         return stepIntervalInSeconds * 1.00f;
+    }
+
+    private Coroutine checkForCoroutines;
+
+    private void OnAnyEnemyDied(float points)
+    {
+        if (enemiesDestroyed) return;
+
+        if (checkForCoroutines != null)
+        {
+            StopCoroutine(checkForCoroutines); // Just in case multiple enemies are destroyed at once (shouldn't happen but just in case)
+        }
+
+        checkForCoroutines = StartCoroutine(CheckRemainingEnemies());
+    }
+
+    private IEnumerator CheckRemainingEnemies()
+    {
+        yield return null;
+
+        if (enemiesDestroyed) yield break;
+
+        if (transform.childCount <= 0) // Check how many enemies remain under the parent object
+        {
+            enemiesDestroyed = true;
+            yield return new WaitForSeconds(0.25f); // Wait before moving onto the next line
+            OnEnemiesDestroyed?.Invoke(); // Send the event that SceneLoader will listen for
+            checkForCoroutines = null; // So that multiple coroutines for checking remaining enemies don't fire at once (just in case multiple enemies get destroyed at the same time)
+        }
     }
 
     // Doing local position since that's how we got it to work for instantiating them
