@@ -111,6 +111,7 @@ public class SceneLoader : MonoBehaviour
 
     private IEnumerator _LoadCreditsCoroutine(bool won)
     {
+        yield return new WaitForSeconds(1);
         AsyncOperation loadOperation = SceneManager.LoadSceneAsync("2D Project/Scenes/Credits");
         while (!loadOperation!.isDone) yield return null; // Exclamation mark after loadOperation makes the null reference exception shut up lmao
 

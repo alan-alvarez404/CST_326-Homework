@@ -11,7 +11,7 @@ public class UFO : MonoBehaviour
     public delegate void UFODiedFunc(int randomPoints); // Func is delegate type
     public static event UFODiedFunc OnUFOHit;
 
-    private float speed = 5f;
+    private float speed = 3.5f;
     
     private SpriteRenderer spriteRenderer;
     private new Collider2D collider;
