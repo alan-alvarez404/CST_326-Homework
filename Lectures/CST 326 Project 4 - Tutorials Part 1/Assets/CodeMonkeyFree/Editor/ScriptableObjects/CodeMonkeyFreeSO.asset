@@ -14,39 +14,44 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentVersion: 1.01
   subtype: kitchenchaos
-  lastShownTimestamp: 1773441957
+  lastShownTimestamp: 1773528505
   lastUpdateResponse:
-    version: 1.00
+    version: 1.01
     versionUrl: https://unitycodemonkey.com
-  checkedLastUpdateTimestamp: 1773441957
+  checkedLastUpdateTimestamp: 1773528505
   lastQOTDResponse:
-    questionId: 163
-    questionText: What is the purpose of Unity Hub?
-    answerA: Provide a space for the community to interact
-    answerB: Manage different Unity versions and Projects
-    answerC: Dashboard for Unity services
+    questionId: 281
+    questionText: 'What is the result of this code:
+
+      <p>int money = 2000000000;
+      // $2 billion</p>
+
+      <p>money += 1000000000; // Adding $1 billion</p>'
+    answerA: money == 3000000000
+    answerB: money == -1294967296
+    answerC: money == 0
     answerD: 
     answerE: 
-  lastQotdTimestamp: 1773441957
+  lastQotdTimestamp: 1773528505
   lastDynamicHeaderResponse:
-    topImageUrl: https://codemonkeyexternal.blob.core.windows.net/external/Misc/humbleBundleSyntyMar25.png
-    topText: Make ANY game with these awesome Assets! (96% OFF ENDS SOON!)
+    topImageUrl: https://codemonkeyexternal.blob.core.windows.net/external/Misc/humbleMar26Audio.png
+    topText: Awesome HumbleBundle with thousands of SFX and Music, 99% OFF!
     topLink: humblebundle
-    bottomText: Learn Unity DOTS for MASSIVE Performance Boosts! (and make an RTS)
-    bottomLink: dotscourse
-  lastDynamicHeaderTimestamp: 1773441957
+    bottomText: My 10+ Years of C# Knowledge in 1 Course!
+    bottomLink: csharpcourse
+  lastDynamicHeaderTimestamp: 1773528505
   websiteLatestMessage:
     text: <a href="https://cmonkey.co/freecourses">Check out all my FREE courses!
       Click here!</a>
-  websiteLatestMessageTimestamp: 1773441957
+  websiteLatestMessageTimestamp: 1773528505
   websiteLatestVideos:
     videos:
-    - youTubeId: ZIg7VoD9ptI
-      title: The FUTURE of Unity in 2025 and BEYOND!
-    - youTubeId: W_XOZAWJF24
-      title: I made the MOST PROFITABLE Game as a Test!
-    - youTubeId: J0KMvH-yFmA
-      title: TOP 10 NEW Games, Made with Unity! (FEBRUARY 2025)
-    - youTubeId: DOSLOa7cnoE
-      title: I SHOULD have done this a long time ago, and YOU too!
-  websiteLatestVideosTimestamp: 1773441957
+    - youTubeId: a4JpMP-pM6k
+      title: TOP 10 NEW Games, Made with Unity! (FEBRUARY 2026)
+    - youTubeId: 5VcshVc1a_k
+      title: How To Make Diegetic 3D UI In Unity (EASY!)
+    - youTubeId: nwW5UB_gBi8
+      title: How to make a living from Indie Dev WITHOUT a Hit!
+    - youTubeId: _QrcgWsr2PI
+      title: What is the FUTURE of Unity in 2026?
+  websiteLatestVideosTimestamp: 1773528505
