@@ -16,7 +16,11 @@ public class NetworkClient : MonoBehaviour
     public GameObject remotePrefab;     // the cube prefab
     public Transform localPlayer;       // your own character/cube
 
+    [Header("Game")]
+    public GameManager gameManager;
+
     // --- internals ---
+    string _clientId;
     TcpClient _tcp;
     StreamWriter _writer;
     Thread _readThread;
@@ -28,6 +32,7 @@ public class NetworkClient : MonoBehaviour
         _tcp = new TcpClient(host, port);
         var stream = _tcp.GetStream();
         _writer = new StreamWriter(stream) { AutoFlush = true };
+        _clientId = System.Guid.NewGuid().ToString("N"); // The "N" format specifier (for "digits only")
 
         _readThread = new Thread(() =>
         {
@@ -46,23 +51,53 @@ public class NetworkClient : MonoBehaviour
     {
         // 1. Send our position
         var p = localPlayer.position;
-        _writer.WriteLine($"{playerID}:{p.x:F2},{p.y:F2},{p.z:F2}");
+        _writer.WriteLine($"{_clientId}|{playerID}:{p.x:F2},{p.y:F2},{p.z:F2}");
 
         // 2. Drain incoming messages
         while (_incoming.TryDequeue(out var msg))
             ApplyMessage(msg);
     }
 
+    public void SendGameMessage(string msg)
+    {
+        _writer.WriteLine(msg);
+    }
+
     void ApplyMessage(string msg)
     {
-        // format: "playerID:x,z"
-        var parts = msg.Split(':');
+        // Split into sender and payload (limit 2 so "GAME:STATE:race" works)
+        var parts = msg.Split(new[] { ':' }, 2);
         if (parts.Length != 2) return;
 
-        var id = parts[0];
-        if (id == playerID) return; // ignore our own reflection
+        var sender = parts[0];
+        var payload = parts[1];
 
-        var coords = parts[1].Split(',');
+        var senderParts = sender.Split('|');
+        if (senderParts.Length != 2) return;
+        var id = senderParts[0];
+        var displayName = senderParts.Length > 1 ? senderParts[1] : id;
+
+        // Game controller messages
+        if (id == "GAME")
+        {
+            if (gameManager != null) gameManager.OnGameMessage(payload);
+            return;
+        }
+
+        if (id == _clientId) return; // ignore our own reflection
+
+        // Remote player ready
+        if (payload == "READY")
+        {
+            if (gameManager != null) gameManager.OnPlayerReady(displayName);
+            return;
+        }
+
+        // Remote player finished (handled by GameController scoring)
+        if (payload == "FINISH") return;
+
+        // Position update: "x,y,z"
+        var coords = payload.Split(',');
         if (coords.Length != 3) return;
         float x = float.Parse(coords[0]);
         float y = float.Parse(coords[1]);
@@ -72,8 +107,8 @@ public class NetworkClient : MonoBehaviour
         if (!_remotes.TryGetValue(id, out var obj))
         {
             obj = Instantiate(remotePrefab);
-            obj.name = id;
-            AddNameLabel(obj, id);
+            obj.name = displayName;
+            AddNameLabel(obj, displayName);
             _remotes[id] = obj;
         }
         obj.transform.position = new Vector3(x, y, z);

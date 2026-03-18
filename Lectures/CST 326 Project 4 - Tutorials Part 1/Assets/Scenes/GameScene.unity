@@ -1348,7 +1348,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5467640990717695466, guid: 4955ba767e3798247b96f25ada06a219, type: 3}
       propertyPath: testing
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5467640990717695466, guid: 4955ba767e3798247b96f25ada06a219, type: 3}
       propertyPath: kitchenObjectSO
