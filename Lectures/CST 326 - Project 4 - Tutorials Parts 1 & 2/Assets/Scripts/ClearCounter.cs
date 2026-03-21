@@ -1,35 +1,29 @@
 using UnityEngine;
 
-public class ClearCounter : MonoBehaviour
+// Implementing the IKitchenObjectParent interface
+public class ClearCounter : MonoBehaviour, IKitchenObjectParent
 {
+    
+    
     [SerializeField] private KitchenObjectSO kitchenObjectSO;
     [SerializeField] private Transform counterTopPoint;
-    [SerializeField] private ClearCounter secondClearCounter;
-    [SerializeField] private bool testing;
+
 
     private KitchenObject kitchenObject;
 
-    private void Update()
-    {
-        if (testing && Input.GetKeyDown(KeyCode.T))
-        {
-            if (kitchenObject != null)
-            {
-                kitchenObject.SetClearCounter(secondClearCounter);
-            }
-        }
-    }
+    // Removed the Update portion here which solely handled the testing code as long with the two testing fields that were needed
 
-    public void Interact()
+    public void Interact(Player player)
     {
         if (kitchenObject == null)
         {
             Transform kitchenObjectTransform = Instantiate(kitchenObjectSO.prefab, counterTopPoint);
-            kitchenObjectTransform.GetComponent<KitchenObject>().SetClearCounter(this);
+            kitchenObjectTransform.GetComponent<KitchenObject>().SetKitchenObjectParent(this);
         }
         else
         {
-            Debug.Log(kitchenObject.GetClearCounter());
+            // Give the object to the player
+            kitchenObject.SetKitchenObjectParent(player);
         }
     }
 
