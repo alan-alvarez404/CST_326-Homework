@@ -14,37 +14,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentVersion: 1.01
   subtype: kitchenchaos
-  lastShownTimestamp: 1774117143
+  lastShownTimestamp: 1774206944
   lastUpdateResponse:
     version: 1.01
     versionUrl: https://unitycodemonkey.com
-  checkedLastUpdateTimestamp: 1774117143
+  checkedLastUpdateTimestamp: 1774206944
   lastQOTDResponse:
-    questionId: 283
-    questionText: 'Is there a problem with this code?
-
-      <p>private void SetCameraFollowFunc(Func&lt;Vector3&gt;
-      cameraFollowFunc) { }</p>
-
-      <p>SetCameraFollowFunc(() =&gt; new Vector3(1,
-      0, 0));</p>'
-    answerA: No
-    answerB: 'Should be: SetCameraFollowFunc(() =&#62; return new Vector3(1, 0, 0));'
-    answerC: 'Should be: SetCameraFollowFunc((Vector3(1, 0, 0)) =&#62; { });'
+    questionId: 284
+    questionText: What is the difference between Action&lt;float&gt; and Func&lt;float&gt;
+      ?
+    answerA: Both are the same
+    answerB: Action&#60;float&#62; takes float parameter and Func&#60;float&#62;
+      returns float
+    answerC: Func&#60;float&#62; takes float parameter and Action&#60;float&#62;
+      returns float
     answerD: 
     answerE: 
-  lastQotdTimestamp: 1774117143
+  lastQotdTimestamp: 1774206944
   lastDynamicHeaderResponse:
     topImageUrl: https://codemonkeyexternal.blob.core.windows.net/external/Misc/humbleBundleMar26Synty.png
     topText: Synty Bundle! Awesome Low Poly Sci-Fi Assets and Anims!
     topLink: humblebundle
     bottomText: My 10+ Years of C# Knowledge in 1 Course!
     bottomLink: csharpcourse
-  lastDynamicHeaderTimestamp: 1774117143
+  lastDynamicHeaderTimestamp: 1774206944
   websiteLatestMessage:
     text: <a href="https://cmonkey.co/freecourses">Check out all my FREE courses!
       Click here!</a>
-  websiteLatestMessageTimestamp: 1774117143
+  websiteLatestMessageTimestamp: 1774206944
   websiteLatestVideos:
     videos:
     - youTubeId: eC89Ypzj5vU
@@ -55,4 +52,4 @@ MonoBehaviour:
       title: The STATE of VR in 2026!
     - youTubeId: xvGRjPssGnw
       title: Do NOT make this MISTAKE with your Games!
-  websiteLatestVideosTimestamp: 1774117143
+  websiteLatestVideosTimestamp: 1774206944
