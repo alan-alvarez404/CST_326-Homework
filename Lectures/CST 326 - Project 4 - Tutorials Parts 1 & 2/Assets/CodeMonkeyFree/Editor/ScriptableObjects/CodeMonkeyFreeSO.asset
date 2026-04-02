@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentVersion: 1.01
   subtype: kitchenchaos
-  lastShownTimestamp: 1774987751
+  lastShownTimestamp: 1775081966
   lastUpdateResponse:
     version: 1.01
     versionUrl: https://unitycodemonkey.com
-  checkedLastUpdateTimestamp: 1774987751
+  checkedLastUpdateTimestamp: 1775081966
   lastQOTDResponse:
     questionId: 287
     questionText: 'What is the Color on the SpriteRenderer after running this code?
@@ -35,26 +35,26 @@ MonoBehaviour:
     answerC: Don't Know
     answerD: 
     answerE: 
-  lastQotdTimestamp: 1774987751
+  lastQotdTimestamp: 1775081966
   lastDynamicHeaderResponse:
     topImageUrl: https://codemonkeyexternal.blob.core.windows.net/external/Misc/gameDevPracticeLab_2.png
     topText: Weekly Game Mechanic Challenges to help you learn by DOING!
     topLink: practicelab
     bottomText: My 10+ Years of C# Knowledge in 1 Course!
     bottomLink: csharpcourse
-  lastDynamicHeaderTimestamp: 1774987751
+  lastDynamicHeaderTimestamp: 1775081966
   websiteLatestMessage:
     text: <a href="https://cmonkey.co/freecourses">Check out all my FREE courses!
       Click here!</a>
-  websiteLatestMessageTimestamp: 1774987751
+  websiteLatestMessageTimestamp: 1775081966
   websiteLatestVideos:
     videos:
+    - youTubeId: x3ICfkTfoUM
+      title: I QUIT Unity! Notepad is my new Game Engine!
     - youTubeId: 9HX48q7gbBw
       title: What exactly is a SMALL game?
     - youTubeId: a6Nv4k2Mqng
       title: TOP 10 NEW Systems and Tools MARCH 2026! | Unity Asset Store
     - youTubeId: Ng0VH0SmqRo
       title: I've wanted to do this for YEARS!
-    - youTubeId: iHOtW9ErfNw
-      title: Game Development is a LIE!
-  websiteLatestVideosTimestamp: 1774987751
+  websiteLatestVideosTimestamp: 1775081966
