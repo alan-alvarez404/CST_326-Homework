@@ -35,7 +35,7 @@ public class DeliveryManager : MonoBehaviour
         {
             spawnRecipeTimer = spawnRecipeTimerMax;
 
-            if (waitingRecipeSOList.Count < waitingRecipesMax)
+            if (KitchenGameManager.Instance.IsGamePlaying() && waitingRecipeSOList.Count < waitingRecipesMax)
             {
                 RecipeSO waitingRecipeSO = recipeListSO.recipeSOList[UnityEngine.Random.Range(0, recipeListSO.recipeSOList.Count)]; // I never got that message saying something along the lines of there being two Random functions and that you have to specify it to use UnityEngine.Random. Even right now I wrote UnityEngine.Random and rider is telling me that's redundant :/
                 //Debug.Log(waitingRecipeSO.recipeName);
